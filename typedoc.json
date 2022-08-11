@@ -1,0 +1,12 @@
+{
+  "readme": "README.md",
+  "includeVersion": true,
+  "name": "Schotten Totten",
+  "theme": "default",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "tsconfig": "tsconfig.json",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true
+}
