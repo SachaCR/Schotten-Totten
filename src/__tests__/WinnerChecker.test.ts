@@ -1,0 +1,221 @@
+import { BoundaryMarker } from '../BoundaryMarker';
+import { Card } from '../Card';
+import { WinnerChecker } from '../WinnerChecker';
+
+describe('Component WinnerChecker', () => {
+  describe('Given a boundary markers list', () => {
+    const marker1 = new BoundaryMarker();
+    const marker2 = new BoundaryMarker();
+    const marker3 = new BoundaryMarker();
+    const marker4 = new BoundaryMarker();
+    const marker5 = new BoundaryMarker();
+    const marker6 = new BoundaryMarker();
+    const marker7 = new BoundaryMarker();
+    const marker8 = new BoundaryMarker();
+    const marker9 = new BoundaryMarker();
+
+    marker1.addCard('1', new Card(1, 'blue'));
+    marker1.addCard('1', new Card(2, 'blue'));
+    marker1.addCard('1', new Card(3, 'blue'));
+    marker1.addCard('2', new Card(4, 'blue'));
+    marker1.addCard('2', new Card(5, 'blue'));
+    marker1.addCard('2', new Card(6, 'blue')); // 2 Wins
+    marker1.claim();
+
+    marker2.addCard('1', new Card(7, 'blue'));
+    marker2.addCard('1', new Card(8, 'blue'));
+    marker2.addCard('1', new Card(9, 'blue'));
+    marker2.addCard('2', new Card(1, 'red'));
+    marker2.addCard('2', new Card(2, 'red'));
+    marker2.addCard('2', new Card(3, 'red')); // 1 Wins
+    marker2.claim();
+
+    marker3.addCard('1', new Card(4, 'red'));
+    marker3.addCard('1', new Card(5, 'red'));
+    marker3.addCard('1', new Card(6, 'red'));
+    marker3.addCard('2', new Card(7, 'red'));
+    marker3.addCard('2', new Card(8, 'red'));
+    marker3.addCard('2', new Card(9, 'red')); // 2 Wins
+    marker3.claim();
+
+    marker4.addCard('1', new Card(1, 'brown'));
+    marker4.addCard('1', new Card(2, 'brown'));
+    marker4.addCard('1', new Card(3, 'brown'));
+    marker4.addCard('2', new Card(4, 'brown'));
+    marker4.addCard('2', new Card(5, 'brown'));
+    marker4.addCard('2', new Card(6, 'brown')); // 2 Wins
+    marker4.claim();
+
+    marker5.addCard('1', new Card(7, 'brown'));
+    marker5.addCard('1', new Card(8, 'brown'));
+    marker5.addCard('1', new Card(9, 'brown'));
+    marker5.addCard('2', new Card(1, 'green'));
+    marker5.addCard('2', new Card(2, 'green'));
+    marker5.addCard('2', new Card(3, 'green')); // 1 Wins
+    marker5.claim();
+
+    marker6.addCard('1', new Card(4, 'green'));
+    marker6.addCard('1', new Card(5, 'green'));
+    marker6.addCard('1', new Card(6, 'green'));
+    marker6.addCard('2', new Card(7, 'green'));
+    marker6.addCard('2', new Card(8, 'green'));
+    marker6.addCard('2', new Card(9, 'green')); // 2 Wins
+    marker6.claim();
+
+    marker7.addCard('1', new Card(1, 'orange'));
+    marker7.addCard('1', new Card(2, 'orange'));
+    marker7.addCard('1', new Card(3, 'orange'));
+    marker7.addCard('2', new Card(4, 'orange'));
+    marker7.addCard('2', new Card(5, 'orange'));
+    marker7.addCard('2', new Card(6, 'orange')); // 2 Wins
+    marker7.claim();
+
+    marker8.addCard('1', new Card(7, 'orange'));
+    marker8.addCard('1', new Card(8, 'orange'));
+    marker8.addCard('1', new Card(9, 'orange'));
+    marker8.addCard('2', new Card(1, 'yellow'));
+    marker8.addCard('2', new Card(2, 'yellow'));
+    marker8.addCard('2', new Card(3, 'yellow')); // 1 Wins
+    marker8.claim();
+
+    marker9.addCard('1', new Card(4, 'yellow'));
+    marker9.addCard('1', new Card(5, 'yellow'));
+    marker9.addCard('1', new Card(6, 'yellow'));
+    marker9.addCard('2', new Card(7, 'yellow'));
+    marker9.addCard('2', new Card(8, 'yellow'));
+    marker9.addCard('2', new Card(9, 'yellow')); // 2 Wins
+    marker9.claim();
+
+    describe('Wih player 2 owning 6 markers', () => {
+      describe('When I check if there is a winner', () => {
+        const winner = WinnerChecker.isThereAWinner([
+          marker1,
+          marker2,
+          marker3,
+          marker4,
+          marker5,
+          marker6,
+          marker7,
+          marker8,
+          marker9,
+        ]);
+
+        it('Then player 2 is the winner', () => {
+          expect(winner).toStrictEqual('2');
+        });
+      });
+    });
+  });
+
+  describe('Given a boundary markers list', () => {
+    const marker1 = new BoundaryMarker();
+    const marker2 = new BoundaryMarker();
+    const marker3 = new BoundaryMarker();
+    const marker4 = new BoundaryMarker();
+    const marker5 = new BoundaryMarker();
+    const marker6 = new BoundaryMarker();
+    const marker7 = new BoundaryMarker();
+    const marker8 = new BoundaryMarker();
+    const marker9 = new BoundaryMarker();
+
+    marker1.addCard('2', new Card(1, 'blue'));
+    marker1.addCard('2', new Card(2, 'blue'));
+    marker1.addCard('2', new Card(3, 'blue'));
+    marker1.addCard('1', new Card(4, 'blue'));
+    marker1.addCard('1', new Card(5, 'blue'));
+    marker1.addCard('1', new Card(6, 'blue')); // 1 Wins
+    marker1.claim();
+
+    marker2.addCard('2', new Card(7, 'blue'));
+    marker2.addCard('2', new Card(8, 'green'));
+    marker2.addCard('2', new Card(9, 'blue'));
+    marker2.addCard('1', new Card(1, 'red'));
+    marker2.addCard('1', new Card(2, 'red'));
+    marker2.addCard('1', new Card(3, 'red')); // 1 Wins
+    marker2.claim();
+
+    marker3.addCard('2', new Card(4, 'red'));
+    marker3.addCard('2', new Card(4, 'yellow'));
+    marker3.addCard('2', new Card(4, 'green'));
+    marker3.addCard('1', new Card(7, 'red'));
+    marker3.addCard('1', new Card(8, 'red'));
+    marker3.addCard('1', new Card(9, 'red')); // 1 Wins
+    marker3.claim();
+
+    describe('Wih player 1 owning 3 consecutive markers', () => {
+      describe('When I check if there is a winner', () => {
+        const winner = WinnerChecker.isThereAWinner([
+          marker1,
+          marker2,
+          marker3,
+          marker4,
+          marker5,
+          marker6,
+          marker7,
+          marker8,
+          marker9,
+        ]);
+
+        it('Then player 1 is the winner', () => {
+          expect(winner).toStrictEqual('1');
+        });
+      });
+    });
+  });
+
+  describe('Given a boundary markers list', () => {
+    const marker1 = new BoundaryMarker();
+    const marker2 = new BoundaryMarker();
+    const marker3 = new BoundaryMarker();
+    const marker4 = new BoundaryMarker();
+    const marker5 = new BoundaryMarker();
+    const marker6 = new BoundaryMarker();
+    const marker7 = new BoundaryMarker();
+    const marker8 = new BoundaryMarker();
+    const marker9 = new BoundaryMarker();
+
+    marker1.addCard('2', new Card(1, 'blue'));
+    marker1.addCard('2', new Card(2, 'blue'));
+    marker1.addCard('2', new Card(3, 'blue'));
+    marker1.addCard('1', new Card(4, 'blue'));
+    marker1.addCard('1', new Card(5, 'blue'));
+    marker1.addCard('1', new Card(6, 'blue')); // 1 Wins
+    marker1.claim();
+
+    marker2.addCard('2', new Card(7, 'blue'));
+    marker2.addCard('2', new Card(8, 'green'));
+    marker2.addCard('2', new Card(9, 'blue'));
+    marker2.addCard('1', new Card(1, 'red'));
+    marker2.addCard('1', new Card(2, 'red'));
+    marker2.addCard('1', new Card(3, 'red')); // 1 Wins
+    marker2.claim();
+
+    marker3.addCard('2', new Card(4, 'red'));
+    marker3.addCard('2', new Card(4, 'yellow'));
+    marker3.addCard('2', new Card(4, 'green'));
+    marker3.addCard('1', new Card(1, 'red'));
+    marker3.addCard('1', new Card(1, 'blue'));
+    marker3.addCard('1', new Card(1, 'green')); // 2 Wins
+    marker3.claim();
+
+    describe('Wih no winner', () => {
+      describe('When I check if there is a winner', () => {
+        const winner = WinnerChecker.isThereAWinner([
+          marker1,
+          marker2,
+          marker3,
+          marker4,
+          marker5,
+          marker6,
+          marker7,
+          marker8,
+          marker9,
+        ]);
+
+        it('Then nobody is the winner', () => {
+          expect(winner).toStrictEqual('NOBODY');
+        });
+      });
+    });
+  });
+});

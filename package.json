@@ -1,0 +1,82 @@
+{
+  "name": "schotten-totten",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest ./src",
+    "test:watch": "jest ./src --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SachaCR.Schotten-Totten.git"
+  },
+  "author": "BankingTeam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SachaCR/Schotten-Totten.issues"
+  },
+  "homepage": "https://github.com/SachaCR#Schotten-Totten.readme",
+  "dependencies": {
+    "jest": "^27.5.1",
+    "jest-html-reporters": "^3.0.10"
+  },
+  "devDependencies": {
+    "@types/jest": "27.4.1",
+    "prettier": "2.6.1",
+    "ts-jest": "27.1.4",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.ts"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text-summary"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "reporters": [
+      "default",
+      [
+        "jest-html-reporters",
+        {
+          "publicPath": "./test-report",
+          "filename": "index.html",
+          "openReport": false,
+          "pageTitle": "Test Report"
+        }
+      ]
+    ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src",
+      "config"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "src/**/*.spec.ts",
+      "public/*"
+    ],
+    "verbose": false,
+    "exec": "ts-node src/index.ts"
+  },
+  "volta": {
+    "node": "16.16.0",
+    "npm": "8.17.0"
+  }
+}

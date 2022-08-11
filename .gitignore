@@ -1,0 +1,12 @@
+
+.DS_Store
+
+coverage
+node_modules
+dist
+public
+.idea
+documentation/typedoc
+personal
+scripts/personal
+config/local.json
