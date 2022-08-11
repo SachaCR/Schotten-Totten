@@ -10,11 +10,5 @@
     "sourceMap": true,
     "resolveJsonModule": true
   },
-  "exclude": [
-    "node_modules",
-    "coverage",
-    "dist",
-    "public",
-    "/**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "coverage", "dist", "/**/*.test.ts"]
 }
