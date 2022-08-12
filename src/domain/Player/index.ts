@@ -1,4 +1,4 @@
-import { Card, CardDetails } from './Card';
+import { Card, CardDetails } from '../Card';
 
 export type PlayerState = {
   name: string;

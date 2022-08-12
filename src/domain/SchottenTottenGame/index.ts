@@ -1,8 +1,8 @@
-import { BoundaryMarker, BoundaryMarkerState } from './BoundaryMarker';
-import { Card } from './Card';
-import { CardDeck as CardDeck } from './CardDeck';
-import { Player, PlayerState } from './Player';
-import { WinnerChecker } from './WinnerChecker';
+import { BoundaryMarker, BoundaryMarkerState } from '../BoundaryMarker';
+import { Card } from '../Card';
+import { CardDeck as CardDeck } from '../CardDeck';
+import { Player, PlayerState } from '../Player';
+import { WinnerChecker } from '../WinnerChecker';
 
 export type PlayerID = '1' | '2';
 

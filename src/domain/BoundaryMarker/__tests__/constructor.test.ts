@@ -1,4 +1,4 @@
-import { BoundaryMarker } from '../../BoundaryMarker';
+import { BoundaryMarker } from '../';
 
 describe('Component BoundaryMarker', () => {
   describe('Given I want to create a BoundaryMarker', () => {

@@ -1,7 +1,4 @@
-import {
-  CombinationChecker,
-  CombinationDetails,
-} from '../../CombinationChecker';
+import { CombinationChecker, CombinationDetails } from '../';
 
 describe('Component CombinationChecker.whichCombinationWins()', () => {
   const combination1Wins: CombinationDetails[][] = [

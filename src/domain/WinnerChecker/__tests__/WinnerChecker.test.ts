@@ -1,7 +1,7 @@
-import { BoundaryMarker } from '../BoundaryMarker';
-import { Card } from '../Card';
-import { STGame } from '../SchottenTottenGame';
-import { WinnerChecker } from '../WinnerChecker';
+import { WinnerChecker } from '../';
+import { BoundaryMarker } from '../../BoundaryMarker';
+import { Card } from '../../Card';
+import { STGame } from '../../SchottenTottenGame';
 
 describe('Component WinnerChecker', () => {
   describe('Given a boundary markers list', () => {

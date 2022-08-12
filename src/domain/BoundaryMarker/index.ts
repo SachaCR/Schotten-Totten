@@ -1,6 +1,6 @@
-import { Card, CardDetails } from './Card';
-import { CombinationChecker } from './CombinationChecker';
-import { PlayerID, STGame } from './SchottenTottenGame';
+import { Card, CardDetails } from '../Card';
+import { CombinationChecker } from '../CombinationChecker';
+import { PlayerID, STGame } from '../SchottenTottenGame';
 
 export type BoundaryMarkerOwner = '1' | '2' | 'NOBODY';
 

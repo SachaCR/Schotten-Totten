@@ -1,4 +1,4 @@
-import { STGame } from '../../SchottenTottenGame';
+import { STGame } from '../';
 
 describe('Component SchottenTottenGame.startGame()', () => {
   describe('Given a SchottenTottenGame', () => {

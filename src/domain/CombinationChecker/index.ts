@@ -1,4 +1,4 @@
-import { CardColor, CardDetails } from './Card';
+import { CardColor, CardDetails } from '../Card';
 
 export type CombinationTypes =
   | 'sum'

@@ -1,4 +1,4 @@
-import { CardDeck } from '../CardDeck';
+import { CardDeck } from '../';
 
 describe('Component ClanCardDeck', () => {
   describe('Given I create a new ClanCardDeck', () => {

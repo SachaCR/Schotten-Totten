@@ -1,5 +1,5 @@
+import { CombinationChecker } from '../';
 import { CardDetails } from '../../Card';
-import { CombinationChecker } from '../../CombinationChecker';
 
 describe('Component CombinationChecker.determineCombination()', () => {
   describe('Given I have a 1 blue, 4 green, 5 yellow', () => {

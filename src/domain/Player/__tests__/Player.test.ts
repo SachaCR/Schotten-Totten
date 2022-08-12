@@ -1,5 +1,5 @@
-import { Card } from '../Card';
-import { Player } from '../Player';
+import { Player } from '../';
+import { Card } from '../../Card';
 
 describe('Component Player', () => {
   describe('Given a player whos name is John', () => {

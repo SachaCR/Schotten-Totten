@@ -1,5 +1,5 @@
-import { BoundaryMarker } from './BoundaryMarker';
-import { PlayerID, STGame } from './SchottenTottenGame';
+import { BoundaryMarker } from '../BoundaryMarker';
+import { PlayerID, STGame } from '../SchottenTottenGame';
 
 type ClaimData = {
   player1: {

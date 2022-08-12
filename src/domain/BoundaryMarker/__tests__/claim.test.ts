@@ -1,4 +1,4 @@
-import { BoundaryMarker } from '../../BoundaryMarker';
+import { BoundaryMarker } from '../';
 import { Card } from '../../Card';
 import { STGame } from '../../SchottenTottenGame';
 
