@@ -6,15 +6,17 @@ import { WinnerChecker } from './WinnerChecker';
 
 export type PlayerID = '1' | '2';
 
+export type GameStatus = 'INITIATED' | 'STARTED' | 'GAME OVER';
 export type GameState = {
   player1: PlayerState;
   player2: PlayerState;
   boundaryMarkers: BoundaryMarkerState[];
   currentPlayerID: PlayerID;
   winner: PlayerID | 'NOBODY';
+  status: GameStatus;
 };
 
-export class SchottottenGame {
+export class SchottenTottenGame {
   static PLAYER_1: PlayerID = '1';
   static PLAYER_2: PlayerID = '2';
 
@@ -25,6 +27,7 @@ export class SchottottenGame {
   private boundaryMarkers: BoundaryMarker[];
   private currentPlayerID: PlayerID;
   private winner: PlayerID | 'NOBODY';
+  private status: GameStatus;
 
   constructor(player1Name: string, player2Name: string, options?: any) {
     this.winner = 'NOBODY';
@@ -33,13 +36,22 @@ export class SchottottenGame {
     this.player1 = new Player(player1Name);
     this.player2 = new Player(player2Name);
     this.cardDeck = new CardDeck();
-    this.currentPlayerID = SchottottenGame.PLAYER_1;
+    this.currentPlayerID = SchottenTottenGame.PLAYER_1;
+    this.status = 'INITIATED';
 
     for (let i = 0; i < 9; i++) {
       this.boundaryMarkers.push(new BoundaryMarker());
     }
+  }
 
+  shuffleDecks(): void {
     this.cardDeck.shuffleDeck();
+  }
+
+  startGame(): void {
+    if (this.status !== 'INITIATED') {
+      return;
+    }
 
     for (let i = 0; i < this.playerMaxCardInHands; i++) {
       const card1 = this.cardDeck.drawClanCard();
@@ -52,6 +64,8 @@ export class SchottottenGame {
       this.player1.receiveCard(card1);
       this.player2.receiveCard(card2);
     }
+
+    this.status = 'STARTED';
   }
 
   playCard(params: {
@@ -61,6 +75,10 @@ export class SchottottenGame {
     drawFrom: 'CLAN_CARDS' | 'TACTICAL_CARD';
   }): void {
     const { boundaryMarkerIndex, cardIndex, playerID, drawFrom } = params;
+
+    if (this.status !== 'STARTED') {
+      throw new RangeError('GAME_NOT_STARTED_OR_OVER');
+    }
 
     if (!this.isItPlayerTurn(playerID)) {
       throw new RangeError('NOT_YOUR_TURN');
@@ -133,6 +151,7 @@ export class SchottottenGame {
     const winner = this.isThereAWinner();
 
     this.winner = winner;
+    this.status = 'GAME OVER';
   }
 
   readState(): GameState {
@@ -142,21 +161,27 @@ export class SchottottenGame {
       boundaryMarkers: this.boundaryMarkers.map((bm) => bm.readState()),
       currentPlayerID: this.currentPlayerID,
       winner: this.winner,
+      status: this.status,
     };
   }
 
-  pass(playerID: PlayerID): void {
-    if (!this.isItPlayerTurn(playerID)) {
-      throw new RangeError('NOT_YOUR_TURN');
-    }
+  // @TODO un-comment when tactical cards are implemented.
 
-    // TODO Verify player can pass
-    // isAllBoundaryMarker full on his side
-    // noMoreClanCardInHand
-    //
+  // pass(playerID: PlayerID): void {
+  //   if (!this.isItPlayerTurn(playerID)) {
+  //     throw new RangeError('NOT_YOUR_TURN');
+  //   }
 
-    this.currentPlayerID = this.currentPlayerID === '1' ? '2' : '1';
-  }
+  //   const playerCompletedAllMarkers =
+  //     this.isPlayerCompletedAllMarkers(playerID);
+  //   const playerHasOnlyTacticalCards = false; // isPlayerHasOnlyTacticalCards(playerID);
+
+  //   if (!playerCompletedAllMarkers || !playerHasOnlyTacticalCards) {
+  //     throw new RangeError('PLAYER_CANNOT_PASS');
+  //   }
+
+  //   this.currentPlayerID = this.currentPlayerID === '1' ? '2' : '1';
+  // }
 
   private isItPlayerTurn(playerID: PlayerID): boolean {
     return this.currentPlayerID === playerID ? true : false;
@@ -172,6 +197,24 @@ export class SchottottenGame {
   private isPlayerCardIndexValid(cardIndex: number): boolean {
     return cardIndex < this.playerMaxCardInHands && cardIndex >= 0;
   }
+
+  // @TODO un-comment when tactical cards are implemented.
+  // private isPlayerCompletedAllMarkers(playerID: PlayerID): boolean {
+  //   return this.boundaryMarkers
+  //     .map((marker) => marker.readState())
+  //     .every((markerState) => {
+  //       const playerCards =
+  //         playerID === '1'
+  //           ? markerState.player1Cards
+  //           : markerState.player2Cards;
+  //       playerCards.length === markerState.maximumCardNumber;
+  //     });
+  // }
+
+  // @TODO un-comment when tactical cards are implemented.
+  // private isPlayerHasOnlyTacticalCards(): boolean {
+  //   return false;
+  // }
 
   private isThereAWinner(): PlayerID | 'NOBODY' {
     return WinnerChecker.isThereAWinner(this.boundaryMarkers);

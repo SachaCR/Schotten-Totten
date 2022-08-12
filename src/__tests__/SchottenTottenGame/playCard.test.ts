@@ -1,9 +1,10 @@
-import { SchottottenGame } from '../../SchottottenGame';
+import { SchottenTottenGame } from '../../SchottenTottenGame';
 
-describe('Component SchottottenGame.playCard()', () => {
+describe('Component SchottenTottenGame.playCard()', () => {
   describe('Given a Game that just started', () => {
     describe('When player 1 plays a card', () => {
-      const game = new SchottottenGame('John', 'Sarah', {});
+      const game = new SchottenTottenGame('John', 'Sarah', {});
+      game.startGame();
 
       game.playCard({
         playerID: '1',
@@ -25,7 +26,9 @@ describe('Component SchottottenGame.playCard()', () => {
   });
 
   describe('Given a Game and player 1 just played', () => {
-    const game = new SchottottenGame('John', 'Sarah', {});
+    const game = new SchottenTottenGame('John', 'Sarah', {});
+    game.startGame();
+
     game.playCard({
       playerID: '1',
       boundaryMarkerIndex: 0,
@@ -53,7 +56,8 @@ describe('Component SchottottenGame.playCard()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottottenGame('John', 'Sarah', {});
+    const game = new SchottenTottenGame('John', 'Sarah', {});
+    game.startGame();
 
     describe('When player 1 tries to plays on an invalid boundary marker', () => {
       it('Then it throws a INVALID_BOUNDARY_ID error', () => {
@@ -75,7 +79,8 @@ describe('Component SchottottenGame.playCard()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottottenGame('John', 'Sarah', {});
+    const game = new SchottenTottenGame('John', 'Sarah', {});
+    game.startGame();
 
     describe('When player 1 tries to plays on an invalid card index', () => {
       it('Then it throws a INVALID_CARD_INDEX error', () => {
@@ -97,7 +102,8 @@ describe('Component SchottottenGame.playCard()', () => {
   });
 
   describe('Given a Game with a full boundary marker for player 1', () => {
-    const game = new SchottottenGame('John', 'Sarah', {});
+    const game = new SchottenTottenGame('John', 'Sarah', {});
+    game.startGame();
 
     game.playCard({
       playerID: '1',

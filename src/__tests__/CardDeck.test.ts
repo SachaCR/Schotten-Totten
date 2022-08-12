@@ -47,6 +47,7 @@ describe('Component ClanCardDeck', () => {
         }
 
         // Flakky test as the shuffle could set the 9 yellow on top of the deck.
+        // @TODO Take time to make it testable
         it('Then I dont get a 9 yellow', () => {
           expect(card).toBeDefined();
           expect(card.readCard()).not.toStrictEqual({

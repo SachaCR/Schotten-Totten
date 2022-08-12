@@ -11,7 +11,7 @@ export class CardDeck {
       cards.push(new Card(i, 'blue'));
       cards.push(new Card(i, 'brown'));
       cards.push(new Card(i, 'green'));
-      cards.push(new Card(i, 'red'));
+      cards.push(new Card(i, 'purple'));
       cards.push(new Card(i, 'orange'));
       cards.push(new Card(i, 'yellow'));
     }
@@ -34,10 +34,8 @@ export class CardDeck {
       cards[j] = temp;
     }
 
-    // TODO When implementin tactical cards
-
+    // @TODO When implementing tactical cards
     // const tacticalCards = this.tacticalCards;
-
     // for (let k = tacticalCards.length - 1; k > 0; k--) {
     //   const l = Math.floor(Math.random() * (k + 1));
     //   const temp = tacticalCards[k];

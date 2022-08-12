@@ -1,13 +1,15 @@
 import { Card, CardDetails } from './Card';
 import { CombinationChecker } from './CombinationChecker';
-import { PlayerID } from './SchottottenGame';
+import { PlayerID } from './SchottenTottenGame';
 
 export type BoundaryMarkerOwner = '1' | '2' | 'NOBODY';
+
 export type BoundaryMarkerState = {
   owner: BoundaryMarkerOwner;
   player1Cards: CardDetails[];
   player2Cards: CardDetails[];
   firstPlayerToComplete?: PlayerID;
+  maximumCardNumber: number;
 };
 
 export class BoundaryMarker {
@@ -30,6 +32,7 @@ export class BoundaryMarker {
       player1Cards: this.player1Cards.map((card) => card.readCard()),
       player2Cards: this.player2Cards.map((card) => card.readCard()),
       firstPlayerToComplete: this.firstPlayerToComplete,
+      maximumCardNumber: this.maximumCardNumber,
     };
   }
 

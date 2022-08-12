@@ -89,11 +89,11 @@ describe('Component BoundaryMarker.addCard()', () => {
       boundaryMarker.addCard('1', new Card(3, 'blue'));
 
       describe('And 2 on player 2 side', () => {
-        boundaryMarker.addCard('2', new Card(2, 'red'));
-        boundaryMarker.addCard('2', new Card(3, 'red'));
+        boundaryMarker.addCard('2', new Card(2, 'purple'));
+        boundaryMarker.addCard('2', new Card(3, 'purple'));
 
         describe('When player 2 adds a third card', () => {
-          boundaryMarker.addCard('2', new Card(1, 'red'));
+          boundaryMarker.addCard('2', new Card(1, 'purple'));
 
           it('Then firstPlayerToComplete remains equals 1', () => {
             expect(

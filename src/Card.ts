@@ -2,7 +2,7 @@ export const cardColors = [
   'blue',
   'brown',
   'green',
-  'red',
+  'purple',
   'orange',
   'yellow',
 ] as const;

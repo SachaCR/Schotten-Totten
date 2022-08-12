@@ -1,8 +1,8 @@
-import { SchottottenGame } from '../../SchottottenGame';
+import { SchottenTottenGame } from '../../SchottenTottenGame';
 
-describe('Component SchottottenGame.claim()', () => {
+describe('Component SchottenTottenGame.claim()', () => {
   describe('Given a Game', () => {
-    const game = new SchottottenGame('John', 'Sarah', {});
+    const game = new SchottenTottenGame('John', 'Sarah', {});
 
     describe('With current is player 1', () => {
       describe('When player 1 tries to claim a uncompleted boundary marker', () => {
@@ -25,7 +25,7 @@ describe('Component SchottottenGame.claim()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottottenGame('John', 'Sarah', {});
+    const game = new SchottenTottenGame('John', 'Sarah', {});
     describe('With current is player 1', () => {
       describe('When player 2 tries to claim a uncompleted boundary marker', () => {
         it('Then it throws a NOT_YOUR_TURN error', () => {
@@ -47,7 +47,7 @@ describe('Component SchottottenGame.claim()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottottenGame('John', 'Sarah', {});
+    const game = new SchottenTottenGame('John', 'Sarah', {});
     describe('With current is player 1', () => {
       describe('When player 1 tries to claim a an invalid boundary marker', () => {
         it('Then it throws a INVALID_BOUNDARY_ID error', () => {

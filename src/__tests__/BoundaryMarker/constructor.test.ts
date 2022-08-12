@@ -22,6 +22,10 @@ describe('Component BoundaryMarker', () => {
           boundaryMarker.readState().firstPlayerToComplete,
         ).toBeUndefined();
       });
+
+      it('Then the maximum card number is 3', () => {
+        expect(boundaryMarker.readState().maximumCardNumber).toStrictEqual(3);
+      });
     });
   });
 });

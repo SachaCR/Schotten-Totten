@@ -25,17 +25,17 @@ describe('Component WinnerChecker', () => {
     marker2.addCard('1', new Card(7, 'blue'));
     marker2.addCard('1', new Card(8, 'blue'));
     marker2.addCard('1', new Card(9, 'blue'));
-    marker2.addCard('2', new Card(1, 'red'));
-    marker2.addCard('2', new Card(2, 'red'));
-    marker2.addCard('2', new Card(3, 'red')); // 1 Wins
+    marker2.addCard('2', new Card(1, 'purple'));
+    marker2.addCard('2', new Card(2, 'purple'));
+    marker2.addCard('2', new Card(3, 'purple')); // 1 Wins
     marker2.claim();
 
-    marker3.addCard('1', new Card(4, 'red'));
-    marker3.addCard('1', new Card(5, 'red'));
-    marker3.addCard('1', new Card(6, 'red'));
-    marker3.addCard('2', new Card(7, 'red'));
-    marker3.addCard('2', new Card(8, 'red'));
-    marker3.addCard('2', new Card(9, 'red')); // 2 Wins
+    marker3.addCard('1', new Card(4, 'purple'));
+    marker3.addCard('1', new Card(5, 'purple'));
+    marker3.addCard('1', new Card(6, 'purple'));
+    marker3.addCard('2', new Card(7, 'purple'));
+    marker3.addCard('2', new Card(8, 'purple'));
+    marker3.addCard('2', new Card(9, 'purple')); // 2 Wins
     marker3.claim();
 
     marker4.addCard('1', new Card(1, 'brown'));
@@ -86,7 +86,7 @@ describe('Component WinnerChecker', () => {
     marker9.addCard('2', new Card(9, 'yellow')); // 2 Wins
     marker9.claim();
 
-    describe('Wih player 2 owning 6 markers', () => {
+    describe('With player 2 owning 6 markers', () => {
       describe('When I check if there is a winner', () => {
         const winner = WinnerChecker.isThereAWinner([
           marker1,
@@ -129,20 +129,20 @@ describe('Component WinnerChecker', () => {
     marker2.addCard('2', new Card(7, 'blue'));
     marker2.addCard('2', new Card(8, 'green'));
     marker2.addCard('2', new Card(9, 'blue'));
-    marker2.addCard('1', new Card(1, 'red'));
-    marker2.addCard('1', new Card(2, 'red'));
-    marker2.addCard('1', new Card(3, 'red')); // 1 Wins
+    marker2.addCard('1', new Card(1, 'purple'));
+    marker2.addCard('1', new Card(2, 'purple'));
+    marker2.addCard('1', new Card(3, 'purple')); // 1 Wins
     marker2.claim();
 
-    marker3.addCard('2', new Card(4, 'red'));
+    marker3.addCard('2', new Card(4, 'purple'));
     marker3.addCard('2', new Card(4, 'yellow'));
     marker3.addCard('2', new Card(4, 'green'));
-    marker3.addCard('1', new Card(7, 'red'));
-    marker3.addCard('1', new Card(8, 'red'));
-    marker3.addCard('1', new Card(9, 'red')); // 1 Wins
+    marker3.addCard('1', new Card(7, 'purple'));
+    marker3.addCard('1', new Card(8, 'purple'));
+    marker3.addCard('1', new Card(9, 'purple')); // 1 Wins
     marker3.claim();
 
-    describe('Wih player 1 owning 3 consecutive markers', () => {
+    describe('With player 1 owning 3 consecutive markers', () => {
       describe('When I check if there is a winner', () => {
         const winner = WinnerChecker.isThereAWinner([
           marker1,
@@ -185,20 +185,20 @@ describe('Component WinnerChecker', () => {
     marker2.addCard('2', new Card(7, 'blue'));
     marker2.addCard('2', new Card(8, 'green'));
     marker2.addCard('2', new Card(9, 'blue'));
-    marker2.addCard('1', new Card(1, 'red'));
-    marker2.addCard('1', new Card(2, 'red'));
-    marker2.addCard('1', new Card(3, 'red')); // 1 Wins
+    marker2.addCard('1', new Card(1, 'purple'));
+    marker2.addCard('1', new Card(2, 'purple'));
+    marker2.addCard('1', new Card(3, 'purple')); // 1 Wins
     marker2.claim();
 
-    marker3.addCard('2', new Card(4, 'red'));
+    marker3.addCard('2', new Card(4, 'purple'));
     marker3.addCard('2', new Card(4, 'yellow'));
     marker3.addCard('2', new Card(4, 'green'));
-    marker3.addCard('1', new Card(1, 'red'));
+    marker3.addCard('1', new Card(1, 'purple'));
     marker3.addCard('1', new Card(1, 'blue'));
     marker3.addCard('1', new Card(1, 'green')); // 2 Wins
     marker3.claim();
 
-    describe('Wih no winner', () => {
+    describe('With no winner', () => {
       describe('When I check if there is a winner', () => {
         const winner = WinnerChecker.isThereAWinner([
           marker1,

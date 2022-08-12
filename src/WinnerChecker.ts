@@ -1,5 +1,5 @@
 import { BoundaryMarker } from './BoundaryMarker';
-import { PlayerID } from './SchottottenGame';
+import { PlayerID } from './SchottenTottenGame';
 
 type ClaimData = {
   player1: {
