@@ -1,11 +1,11 @@
-import { SchottenTottenGame } from '../../../index';
+import { STGame } from '../../../index';
 
 describe('Component SchottenTottenGame', () => {
   describe('Given I want to start a SchottenTottenGame', () => {
     describe('When I create a new SchottenTottenGame()', () => {
-      const game = new SchottenTottenGame('John', 'Sarah', {});
+      const game = new STGame('John', 'Sarah', {});
       it('Then it returns an instance of SchottenTottenGame', () => {
-        expect(game).toBeInstanceOf(SchottenTottenGame);
+        expect(game).toBeInstanceOf(STGame);
       });
 
       it('Then there is no winner yet', () => {

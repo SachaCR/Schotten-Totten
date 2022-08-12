@@ -1,5 +1,6 @@
 import { BoundaryMarker } from '../BoundaryMarker';
 import { Card } from '../Card';
+import { STGame } from '../SchottenTottenGame';
 import { WinnerChecker } from '../WinnerChecker';
 
 describe('Component WinnerChecker', () => {
@@ -14,76 +15,76 @@ describe('Component WinnerChecker', () => {
     const marker8 = new BoundaryMarker();
     const marker9 = new BoundaryMarker();
 
-    marker1.addCard('1', new Card(1, 'blue'));
-    marker1.addCard('1', new Card(2, 'blue'));
-    marker1.addCard('1', new Card(3, 'blue'));
-    marker1.addCard('2', new Card(4, 'blue'));
-    marker1.addCard('2', new Card(5, 'blue'));
-    marker1.addCard('2', new Card(6, 'blue')); // 2 Wins
+    marker1.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(3, 'blue'));
+    marker1.addCard(STGame.PLAYER_2, new Card(4, 'blue'));
+    marker1.addCard(STGame.PLAYER_2, new Card(5, 'blue'));
+    marker1.addCard(STGame.PLAYER_2, new Card(6, 'blue')); // 2 Wins
     marker1.claim();
 
-    marker2.addCard('1', new Card(7, 'blue'));
-    marker2.addCard('1', new Card(8, 'blue'));
-    marker2.addCard('1', new Card(9, 'blue'));
-    marker2.addCard('2', new Card(1, 'purple'));
-    marker2.addCard('2', new Card(2, 'purple'));
-    marker2.addCard('2', new Card(3, 'purple')); // 1 Wins
+    marker2.addCard(STGame.PLAYER_1, new Card(7, 'blue'));
+    marker2.addCard(STGame.PLAYER_1, new Card(8, 'blue'));
+    marker2.addCard(STGame.PLAYER_1, new Card(9, 'blue'));
+    marker2.addCard(STGame.PLAYER_2, new Card(1, 'purple'));
+    marker2.addCard(STGame.PLAYER_2, new Card(2, 'purple'));
+    marker2.addCard(STGame.PLAYER_2, new Card(3, 'purple')); // 1 Wins
     marker2.claim();
 
-    marker3.addCard('1', new Card(4, 'purple'));
-    marker3.addCard('1', new Card(5, 'purple'));
-    marker3.addCard('1', new Card(6, 'purple'));
-    marker3.addCard('2', new Card(7, 'purple'));
-    marker3.addCard('2', new Card(8, 'purple'));
-    marker3.addCard('2', new Card(9, 'purple')); // 2 Wins
+    marker3.addCard(STGame.PLAYER_1, new Card(4, 'purple'));
+    marker3.addCard(STGame.PLAYER_1, new Card(5, 'purple'));
+    marker3.addCard(STGame.PLAYER_1, new Card(6, 'purple'));
+    marker3.addCard(STGame.PLAYER_2, new Card(7, 'purple'));
+    marker3.addCard(STGame.PLAYER_2, new Card(8, 'purple'));
+    marker3.addCard(STGame.PLAYER_2, new Card(9, 'purple')); // 2 Wins
     marker3.claim();
 
-    marker4.addCard('1', new Card(1, 'brown'));
-    marker4.addCard('1', new Card(2, 'brown'));
-    marker4.addCard('1', new Card(3, 'brown'));
-    marker4.addCard('2', new Card(4, 'brown'));
-    marker4.addCard('2', new Card(5, 'brown'));
-    marker4.addCard('2', new Card(6, 'brown')); // 2 Wins
+    marker4.addCard(STGame.PLAYER_1, new Card(1, 'brown'));
+    marker4.addCard(STGame.PLAYER_1, new Card(2, 'brown'));
+    marker4.addCard(STGame.PLAYER_1, new Card(3, 'brown'));
+    marker4.addCard(STGame.PLAYER_2, new Card(4, 'brown'));
+    marker4.addCard(STGame.PLAYER_2, new Card(5, 'brown'));
+    marker4.addCard(STGame.PLAYER_2, new Card(6, 'brown')); // 2 Wins
     marker4.claim();
 
-    marker5.addCard('1', new Card(7, 'brown'));
-    marker5.addCard('1', new Card(8, 'brown'));
-    marker5.addCard('1', new Card(9, 'brown'));
-    marker5.addCard('2', new Card(1, 'green'));
-    marker5.addCard('2', new Card(2, 'green'));
-    marker5.addCard('2', new Card(3, 'green')); // 1 Wins
+    marker5.addCard(STGame.PLAYER_1, new Card(7, 'brown'));
+    marker5.addCard(STGame.PLAYER_1, new Card(8, 'brown'));
+    marker5.addCard(STGame.PLAYER_1, new Card(9, 'brown'));
+    marker5.addCard(STGame.PLAYER_2, new Card(1, 'green'));
+    marker5.addCard(STGame.PLAYER_2, new Card(2, 'green'));
+    marker5.addCard(STGame.PLAYER_2, new Card(3, 'green')); // 1 Wins
     marker5.claim();
 
-    marker6.addCard('1', new Card(4, 'green'));
-    marker6.addCard('1', new Card(5, 'green'));
-    marker6.addCard('1', new Card(6, 'green'));
-    marker6.addCard('2', new Card(7, 'green'));
-    marker6.addCard('2', new Card(8, 'green'));
-    marker6.addCard('2', new Card(9, 'green')); // 2 Wins
+    marker6.addCard(STGame.PLAYER_1, new Card(4, 'green'));
+    marker6.addCard(STGame.PLAYER_1, new Card(5, 'green'));
+    marker6.addCard(STGame.PLAYER_1, new Card(6, 'green'));
+    marker6.addCard(STGame.PLAYER_2, new Card(7, 'green'));
+    marker6.addCard(STGame.PLAYER_2, new Card(8, 'green'));
+    marker6.addCard(STGame.PLAYER_2, new Card(9, 'green')); // 2 Wins
     marker6.claim();
 
-    marker7.addCard('1', new Card(1, 'orange'));
-    marker7.addCard('1', new Card(2, 'orange'));
-    marker7.addCard('1', new Card(3, 'orange'));
-    marker7.addCard('2', new Card(4, 'orange'));
-    marker7.addCard('2', new Card(5, 'orange'));
-    marker7.addCard('2', new Card(6, 'orange')); // 2 Wins
+    marker7.addCard(STGame.PLAYER_1, new Card(1, 'orange'));
+    marker7.addCard(STGame.PLAYER_1, new Card(2, 'orange'));
+    marker7.addCard(STGame.PLAYER_1, new Card(3, 'orange'));
+    marker7.addCard(STGame.PLAYER_2, new Card(4, 'orange'));
+    marker7.addCard(STGame.PLAYER_2, new Card(5, 'orange'));
+    marker7.addCard(STGame.PLAYER_2, new Card(6, 'orange')); // 2 Wins
     marker7.claim();
 
-    marker8.addCard('1', new Card(7, 'orange'));
-    marker8.addCard('1', new Card(8, 'orange'));
-    marker8.addCard('1', new Card(9, 'orange'));
-    marker8.addCard('2', new Card(1, 'yellow'));
-    marker8.addCard('2', new Card(2, 'yellow'));
-    marker8.addCard('2', new Card(3, 'yellow')); // 1 Wins
+    marker8.addCard(STGame.PLAYER_1, new Card(7, 'orange'));
+    marker8.addCard(STGame.PLAYER_1, new Card(8, 'orange'));
+    marker8.addCard(STGame.PLAYER_1, new Card(9, 'orange'));
+    marker8.addCard(STGame.PLAYER_2, new Card(1, 'yellow'));
+    marker8.addCard(STGame.PLAYER_2, new Card(2, 'yellow'));
+    marker8.addCard(STGame.PLAYER_2, new Card(3, 'yellow')); // 1 Wins
     marker8.claim();
 
-    marker9.addCard('1', new Card(4, 'yellow'));
-    marker9.addCard('1', new Card(5, 'yellow'));
-    marker9.addCard('1', new Card(6, 'yellow'));
-    marker9.addCard('2', new Card(7, 'yellow'));
-    marker9.addCard('2', new Card(8, 'yellow'));
-    marker9.addCard('2', new Card(9, 'yellow')); // 2 Wins
+    marker9.addCard(STGame.PLAYER_1, new Card(4, 'yellow'));
+    marker9.addCard(STGame.PLAYER_1, new Card(5, 'yellow'));
+    marker9.addCard(STGame.PLAYER_1, new Card(6, 'yellow'));
+    marker9.addCard(STGame.PLAYER_2, new Card(7, 'yellow'));
+    marker9.addCard(STGame.PLAYER_2, new Card(8, 'yellow'));
+    marker9.addCard(STGame.PLAYER_2, new Card(9, 'yellow')); // 2 Wins
     marker9.claim();
 
     describe('With player 2 owning 6 markers', () => {
@@ -101,7 +102,7 @@ describe('Component WinnerChecker', () => {
         ]);
 
         it('Then player 2 is the winner', () => {
-          expect(winner).toStrictEqual('2');
+          expect(winner).toStrictEqual(STGame.PLAYER_2);
         });
       });
     });
@@ -118,28 +119,28 @@ describe('Component WinnerChecker', () => {
     const marker8 = new BoundaryMarker();
     const marker9 = new BoundaryMarker();
 
-    marker1.addCard('2', new Card(1, 'blue'));
-    marker1.addCard('2', new Card(2, 'blue'));
-    marker1.addCard('2', new Card(3, 'blue'));
-    marker1.addCard('1', new Card(4, 'blue'));
-    marker1.addCard('1', new Card(5, 'blue'));
-    marker1.addCard('1', new Card(6, 'blue')); // 1 Wins
+    marker1.addCard(STGame.PLAYER_2, new Card(1, 'blue'));
+    marker1.addCard(STGame.PLAYER_2, new Card(2, 'blue'));
+    marker1.addCard(STGame.PLAYER_2, new Card(3, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(4, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(5, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(6, 'blue')); // 1 Wins
     marker1.claim();
 
-    marker2.addCard('2', new Card(7, 'blue'));
-    marker2.addCard('2', new Card(8, 'green'));
-    marker2.addCard('2', new Card(9, 'blue'));
-    marker2.addCard('1', new Card(1, 'purple'));
-    marker2.addCard('1', new Card(2, 'purple'));
-    marker2.addCard('1', new Card(3, 'purple')); // 1 Wins
+    marker2.addCard(STGame.PLAYER_2, new Card(7, 'blue'));
+    marker2.addCard(STGame.PLAYER_2, new Card(8, 'green'));
+    marker2.addCard(STGame.PLAYER_2, new Card(9, 'blue'));
+    marker2.addCard(STGame.PLAYER_1, new Card(1, 'purple'));
+    marker2.addCard(STGame.PLAYER_1, new Card(2, 'purple'));
+    marker2.addCard(STGame.PLAYER_1, new Card(3, 'purple')); // 1 Wins
     marker2.claim();
 
-    marker3.addCard('2', new Card(4, 'purple'));
-    marker3.addCard('2', new Card(4, 'yellow'));
-    marker3.addCard('2', new Card(4, 'green'));
-    marker3.addCard('1', new Card(7, 'purple'));
-    marker3.addCard('1', new Card(8, 'purple'));
-    marker3.addCard('1', new Card(9, 'purple')); // 1 Wins
+    marker3.addCard(STGame.PLAYER_2, new Card(4, 'purple'));
+    marker3.addCard(STGame.PLAYER_2, new Card(4, 'yellow'));
+    marker3.addCard(STGame.PLAYER_2, new Card(4, 'green'));
+    marker3.addCard(STGame.PLAYER_1, new Card(7, 'purple'));
+    marker3.addCard(STGame.PLAYER_1, new Card(8, 'purple'));
+    marker3.addCard(STGame.PLAYER_1, new Card(9, 'purple')); // 1 Wins
     marker3.claim();
 
     describe('With player 1 owning 3 consecutive markers', () => {
@@ -157,7 +158,7 @@ describe('Component WinnerChecker', () => {
         ]);
 
         it('Then player 1 is the winner', () => {
-          expect(winner).toStrictEqual('1');
+          expect(winner).toStrictEqual(STGame.PLAYER_1);
         });
       });
     });
@@ -174,28 +175,28 @@ describe('Component WinnerChecker', () => {
     const marker8 = new BoundaryMarker();
     const marker9 = new BoundaryMarker();
 
-    marker1.addCard('2', new Card(1, 'blue'));
-    marker1.addCard('2', new Card(2, 'blue'));
-    marker1.addCard('2', new Card(3, 'blue'));
-    marker1.addCard('1', new Card(4, 'blue'));
-    marker1.addCard('1', new Card(5, 'blue'));
-    marker1.addCard('1', new Card(6, 'blue')); // 1 Wins
+    marker1.addCard(STGame.PLAYER_2, new Card(1, 'blue'));
+    marker1.addCard(STGame.PLAYER_2, new Card(2, 'blue'));
+    marker1.addCard(STGame.PLAYER_2, new Card(3, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(4, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(5, 'blue'));
+    marker1.addCard(STGame.PLAYER_1, new Card(6, 'blue')); // 1 Wins
     marker1.claim();
 
-    marker2.addCard('2', new Card(7, 'blue'));
-    marker2.addCard('2', new Card(8, 'green'));
-    marker2.addCard('2', new Card(9, 'blue'));
-    marker2.addCard('1', new Card(1, 'purple'));
-    marker2.addCard('1', new Card(2, 'purple'));
-    marker2.addCard('1', new Card(3, 'purple')); // 1 Wins
+    marker2.addCard(STGame.PLAYER_2, new Card(7, 'blue'));
+    marker2.addCard(STGame.PLAYER_2, new Card(8, 'green'));
+    marker2.addCard(STGame.PLAYER_2, new Card(9, 'blue'));
+    marker2.addCard(STGame.PLAYER_1, new Card(1, 'purple'));
+    marker2.addCard(STGame.PLAYER_1, new Card(2, 'purple'));
+    marker2.addCard(STGame.PLAYER_1, new Card(3, 'purple')); // 1 Wins
     marker2.claim();
 
-    marker3.addCard('2', new Card(4, 'purple'));
-    marker3.addCard('2', new Card(4, 'yellow'));
-    marker3.addCard('2', new Card(4, 'green'));
-    marker3.addCard('1', new Card(1, 'purple'));
-    marker3.addCard('1', new Card(1, 'blue'));
-    marker3.addCard('1', new Card(1, 'green')); // 2 Wins
+    marker3.addCard(STGame.PLAYER_2, new Card(4, 'purple'));
+    marker3.addCard(STGame.PLAYER_2, new Card(4, 'yellow'));
+    marker3.addCard(STGame.PLAYER_2, new Card(4, 'green'));
+    marker3.addCard(STGame.PLAYER_1, new Card(1, 'purple'));
+    marker3.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
+    marker3.addCard(STGame.PLAYER_1, new Card(1, 'green')); // 2 Wins
     marker3.claim();
 
     describe('With no winner', () => {

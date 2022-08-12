@@ -1,13 +1,13 @@
-import { SchottenTottenGame } from '../../SchottenTottenGame';
+import { STGame } from '../../SchottenTottenGame';
 
 describe('Component SchottenTottenGame.playCard()', () => {
   describe('Given a Game that just started', () => {
     describe('When player 1 plays a card', () => {
-      const game = new SchottenTottenGame('John', 'Sarah', {});
+      const game = new STGame('John', 'Sarah', {});
       game.startGame();
 
       game.playCard({
-        playerID: '1',
+        playerID: STGame.PLAYER_1,
         boundaryMarkerIndex: 0,
         cardIndex: 0,
         drawFrom: 'CLAN_CARDS',
@@ -20,17 +20,17 @@ describe('Component SchottenTottenGame.playCard()', () => {
       });
 
       it('Then next player is player 2', () => {
-        expect(game.readState().currentPlayerID).toStrictEqual('2');
+        expect(game.readState().currentPlayerID).toStrictEqual(STGame.PLAYER_2);
       });
     });
   });
 
   describe('Given a Game and player 1 just played', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     game.startGame();
 
     game.playCard({
-      playerID: '1',
+      playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
@@ -41,7 +41,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
         let error;
         try {
           game.playCard({
-            playerID: '1',
+            playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: 0,
             cardIndex: 0,
             drawFrom: 'CLAN_CARDS',
@@ -56,7 +56,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     game.startGame();
 
     describe('When player 1 tries to plays on an invalid boundary marker', () => {
@@ -64,7 +64,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
         let error;
         try {
           game.playCard({
-            playerID: '1',
+            playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: -1,
             cardIndex: 0,
             drawFrom: 'CLAN_CARDS',
@@ -79,7 +79,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     game.startGame();
 
     describe('When player 1 tries to plays on an invalid card index', () => {
@@ -87,7 +87,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
         let error;
         try {
           game.playCard({
-            playerID: '1',
+            playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: 0,
             cardIndex: -1,
             drawFrom: 'CLAN_CARDS',
@@ -102,46 +102,46 @@ describe('Component SchottenTottenGame.playCard()', () => {
   });
 
   describe('Given a Game with a full boundary marker for player 1', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     game.startGame();
 
     game.playCard({
-      playerID: '1',
+      playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
 
     game.playCard({
-      playerID: '2',
+      playerID: STGame.PLAYER_2,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
 
     game.playCard({
-      playerID: '1',
+      playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
 
     game.playCard({
-      playerID: '2',
+      playerID: STGame.PLAYER_2,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
 
     game.playCard({
-      playerID: '1',
+      playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
 
     game.playCard({
-      playerID: '2',
+      playerID: STGame.PLAYER_2,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
@@ -152,7 +152,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
         let error;
         try {
           game.playCard({
-            playerID: '1',
+            playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: 0,
             cardIndex: 0,
             drawFrom: 'CLAN_CARDS',

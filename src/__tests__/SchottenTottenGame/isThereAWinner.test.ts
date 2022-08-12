@@ -1,8 +1,8 @@
-import { SchottenTottenGame } from '../../SchottenTottenGame';
+import { STGame } from '../../SchottenTottenGame';
 
 describe('Component SchottenTottenGame()', () => {
   describe('Given an un-shuffled SchottenTottenGame', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     game.startGame();
 
     describe('When 3 markers are won by player 1', () => {
@@ -10,30 +10,39 @@ describe('Component SchottenTottenGame()', () => {
         const boundaryMarkerIndex = parseInt(Math.floor(i / 3).toFixed(0));
 
         game.playCard({
-          playerID: '1',
+          playerID: STGame.PLAYER_1,
           cardIndex: 0,
           boundaryMarkerIndex,
           drawFrom: 'CLAN_CARDS',
         });
 
         game.playCard({
-          playerID: '2',
+          playerID: STGame.PLAYER_2,
           cardIndex: 0,
           boundaryMarkerIndex,
           drawFrom: 'CLAN_CARDS',
         });
       }
 
-      game.claimBoundaryMarker({ playerID: '1', boundaryMarkerIndex: 0 });
-      game.claimBoundaryMarker({ playerID: '1', boundaryMarkerIndex: 1 });
-      game.claimBoundaryMarker({ playerID: '1', boundaryMarkerIndex: 2 });
+      game.claimBoundaryMarker({
+        playerID: STGame.PLAYER_1,
+        boundaryMarkerIndex: 0,
+      });
+      game.claimBoundaryMarker({
+        playerID: STGame.PLAYER_1,
+        boundaryMarkerIndex: 1,
+      });
+      game.claimBoundaryMarker({
+        playerID: STGame.PLAYER_1,
+        boundaryMarkerIndex: 2,
+      });
 
       it('Then game status is GAME OVER', () => {
         expect(game.readState().status).toStrictEqual('GAME OVER');
       });
 
       it('Then 1 is the winner', () => {
-        expect(game.readState().winner).toStrictEqual('1');
+        expect(game.readState().winner).toStrictEqual(STGame.PLAYER_1);
       });
     });
   });

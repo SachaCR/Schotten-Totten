@@ -1,5 +1,6 @@
 import { BoundaryMarker } from '../../BoundaryMarker';
 import { Card } from '../../Card';
+import { STGame } from '../../SchottenTottenGame';
 
 describe('Component BoundaryMarker.addCard()', () => {
   describe('Given an empty BoundaryMarker', () => {
@@ -45,11 +46,11 @@ describe('Component BoundaryMarker.addCard()', () => {
   describe('Given a BoundaryMarker', () => {
     describe('With 2 cards on player 1 side ', () => {
       const boundaryMarker = new BoundaryMarker();
-      boundaryMarker.addCard('1', new Card(1, 'blue'));
-      boundaryMarker.addCard('1', new Card(2, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
 
       describe('When player 1 adds a card', () => {
-        boundaryMarker.addCard('1', new Card(3, 'blue'));
+        boundaryMarker.addCard(STGame.PLAYER_1, new Card(3, 'blue'));
 
         it('Then player 1 cards contains the 3 card', () => {
           expect(boundaryMarker.readState().player1Cards).toStrictEqual([
@@ -75,7 +76,7 @@ describe('Component BoundaryMarker.addCard()', () => {
         it('Then firstPlayerToComplete equals 1', () => {
           expect(
             boundaryMarker.readState().firstPlayerToComplete,
-          ).toStrictEqual('1');
+          ).toStrictEqual(STGame.PLAYER_1);
         });
       });
     });
@@ -84,16 +85,16 @@ describe('Component BoundaryMarker.addCard()', () => {
   describe('Given a BoundaryMarker', () => {
     describe('With 3 cards on player 1 side and 2 on player 2 side', () => {
       const boundaryMarker = new BoundaryMarker();
-      boundaryMarker.addCard('1', new Card(1, 'blue'));
-      boundaryMarker.addCard('1', new Card(2, 'blue'));
-      boundaryMarker.addCard('1', new Card(3, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(3, 'blue'));
 
       describe('And 2 on player 2 side', () => {
-        boundaryMarker.addCard('2', new Card(2, 'purple'));
-        boundaryMarker.addCard('2', new Card(3, 'purple'));
+        boundaryMarker.addCard(STGame.PLAYER_2, new Card(2, 'purple'));
+        boundaryMarker.addCard(STGame.PLAYER_2, new Card(3, 'purple'));
 
         describe('When player 2 adds a third card', () => {
-          boundaryMarker.addCard('2', new Card(1, 'purple'));
+          boundaryMarker.addCard(STGame.PLAYER_2, new Card(1, 'purple'));
 
           it('Then firstPlayerToComplete remains equals 1', () => {
             expect(
@@ -108,16 +109,16 @@ describe('Component BoundaryMarker.addCard()', () => {
   describe('Given a BoundaryMarker', () => {
     describe('With 3 cards on player 1 ', () => {
       const boundaryMarker = new BoundaryMarker();
-      boundaryMarker.addCard('1', new Card(1, 'blue'));
-      boundaryMarker.addCard('1', new Card(2, 'blue'));
-      boundaryMarker.addCard('1', new Card(3, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
+      boundaryMarker.addCard(STGame.PLAYER_1, new Card(3, 'blue'));
 
       describe('When player 1 tries to add a fourth card', () => {
         it('Then it throw a error', () => {
           let error;
 
           try {
-            boundaryMarker.addCard('1', new Card(4, 'blue'));
+            boundaryMarker.addCard(STGame.PLAYER_1, new Card(4, 'blue'));
           } catch (err: any) {
             error = err;
           }

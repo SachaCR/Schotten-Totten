@@ -1,6 +1,6 @@
 import { Card, CardDetails } from './Card';
 import { CombinationChecker } from './CombinationChecker';
-import { PlayerID } from './SchottenTottenGame';
+import { PlayerID, STGame } from './SchottenTottenGame';
 
 export type BoundaryMarkerOwner = '1' | '2' | 'NOBODY';
 
@@ -38,7 +38,7 @@ export class BoundaryMarker {
 
   addCard(playerId: PlayerID, card: Card): void {
     const playerCards =
-      playerId === '1' ? this.player1Cards : this.player2Cards;
+      playerId === STGame.PLAYER_1 ? this.player1Cards : this.player2Cards;
 
     if (playerCards.length >= this.maximumCardNumber) {
       throw new RangeError('BOUNDARY_MARKER_IS_FULL');

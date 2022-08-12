@@ -16,7 +16,7 @@ export type GameState = {
   status: GameStatus;
 };
 
-export class SchottenTottenGame {
+export class STGame {
   static PLAYER_1: PlayerID = '1';
   static PLAYER_2: PlayerID = '2';
 
@@ -36,7 +36,7 @@ export class SchottenTottenGame {
     this.player1 = new Player(player1Name);
     this.player2 = new Player(player2Name);
     this.cardDeck = new CardDeck();
-    this.currentPlayerID = SchottenTottenGame.PLAYER_1;
+    this.currentPlayerID = STGame.PLAYER_1;
     this.status = 'INITIATED';
 
     for (let i = 0; i < 9; i++) {
@@ -92,7 +92,7 @@ export class SchottenTottenGame {
       throw new RangeError('INVALID_CARD_INDEX');
     }
 
-    const player = playerID === '1' ? this.player1 : this.player2;
+    const player = playerID === STGame.PLAYER_1 ? this.player1 : this.player2;
     const card = player.playCard(cardIndex);
 
     try {
@@ -125,7 +125,10 @@ export class SchottenTottenGame {
       player.receiveCard(newCard);
     }
 
-    this.currentPlayerID = this.currentPlayerID === '1' ? '2' : '1';
+    this.currentPlayerID =
+      this.currentPlayerID === STGame.PLAYER_1
+        ? STGame.PLAYER_2
+        : STGame.PLAYER_1;
   }
 
   claimBoundaryMarker(params: {

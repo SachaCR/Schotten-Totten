@@ -1,8 +1,8 @@
-import { SchottenTottenGame } from '../../SchottenTottenGame';
+import { STGame } from '../../SchottenTottenGame';
 
 describe('Component SchottenTottenGame.claim()', () => {
   describe('Given a Game', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
 
     describe('With current is player 1', () => {
       describe('When player 1 tries to claim a uncompleted boundary marker', () => {
@@ -12,7 +12,7 @@ describe('Component SchottenTottenGame.claim()', () => {
           try {
             game.claimBoundaryMarker({
               boundaryMarkerIndex: 0,
-              playerID: '1',
+              playerID: STGame.PLAYER_1,
             });
           } catch (err: any) {
             error = err;
@@ -25,7 +25,7 @@ describe('Component SchottenTottenGame.claim()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     describe('With current is player 1', () => {
       describe('When player 2 tries to claim a uncompleted boundary marker', () => {
         it('Then it throws a NOT_YOUR_TURN error', () => {
@@ -34,7 +34,7 @@ describe('Component SchottenTottenGame.claim()', () => {
           try {
             game.claimBoundaryMarker({
               boundaryMarkerIndex: 0,
-              playerID: '2',
+              playerID: STGame.PLAYER_2,
             });
           } catch (err: any) {
             error = err;
@@ -47,7 +47,7 @@ describe('Component SchottenTottenGame.claim()', () => {
   });
 
   describe('Given a Game', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     describe('With current is player 1', () => {
       describe('When player 1 tries to claim a an invalid boundary marker', () => {
         it('Then it throws a INVALID_BOUNDARY_ID error', () => {
@@ -56,7 +56,7 @@ describe('Component SchottenTottenGame.claim()', () => {
           try {
             game.claimBoundaryMarker({
               boundaryMarkerIndex: 11,
-              playerID: '1',
+              playerID: STGame.PLAYER_1,
             });
           } catch (err: any) {
             error = err;

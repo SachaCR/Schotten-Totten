@@ -1,5 +1,5 @@
 import { BoundaryMarker } from './BoundaryMarker';
-import { PlayerID } from './SchottenTottenGame';
+import { PlayerID, STGame } from './SchottenTottenGame';
 
 type ClaimData = {
   player1: {
@@ -19,11 +19,11 @@ export class WinnerChecker {
       .map((marker) => marker.readState())
       .reduce(
         (claimsData: ClaimData, markerState): ClaimData => {
-          if (markerState.owner === '1') {
+          if (markerState.owner === STGame.PLAYER_1) {
             claimsData.player1.claimsCount += 1;
 
             if (
-              claimsData.previousOwner !== '1' &&
+              claimsData.previousOwner !== STGame.PLAYER_1 &&
               claimsData.player1.consecutiveClaimsCount < 3
             ) {
               claimsData.player1.consecutiveClaimsCount = 0;
@@ -32,11 +32,11 @@ export class WinnerChecker {
             claimsData.player1.consecutiveClaimsCount += 1;
           }
 
-          if (markerState.owner === '2') {
+          if (markerState.owner === STGame.PLAYER_2) {
             claimsData.player2.claimsCount += 1;
 
             if (
-              claimsData.previousOwner !== '2' &&
+              claimsData.previousOwner !== STGame.PLAYER_2 &&
               claimsData.player2.consecutiveClaimsCount < 3
             ) {
               claimsData.player2.consecutiveClaimsCount = 0;
@@ -65,14 +65,14 @@ export class WinnerChecker {
       claimsData.player1.consecutiveClaimsCount >= 3 ||
       claimsData.player1.claimsCount >= 5
     ) {
-      return '1';
+      return STGame.PLAYER_1;
     }
 
     if (
       claimsData.player2.consecutiveClaimsCount >= 3 ||
       claimsData.player2.claimsCount >= 5
     ) {
-      return '2';
+      return STGame.PLAYER_2;
     }
 
     return 'NOBODY';

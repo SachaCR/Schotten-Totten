@@ -1,8 +1,8 @@
-import { SchottenTottenGame } from '../../SchottenTottenGame';
+import { STGame } from '../../SchottenTottenGame';
 
 describe('Component SchottenTottenGame.startGame()', () => {
   describe('Given a SchottenTottenGame', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
 
     describe('When I start the game', () => {
       game.startGame();
@@ -18,7 +18,7 @@ describe('Component SchottenTottenGame.startGame()', () => {
   });
 
   describe('Given a started SchottenTottenGame', () => {
-    const game = new SchottenTottenGame('John', 'Sarah', {});
+    const game = new STGame('John', 'Sarah', {});
     game.startGame();
 
     describe('When I start the game again', () => {
