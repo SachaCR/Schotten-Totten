@@ -15,6 +15,7 @@ describe('Component SchottenTottenGame()', () => {
           boundaryMarkerIndex,
           drawFrom: 'CLAN_CARDS',
         });
+        game.endTurn();
 
         game.playCard({
           playerID: STGame.PLAYER_2,
@@ -22,6 +23,7 @@ describe('Component SchottenTottenGame()', () => {
           boundaryMarkerIndex,
           drawFrom: 'CLAN_CARDS',
         });
+        game.endTurn();
       }
 
       game.claimBoundaryMarker({

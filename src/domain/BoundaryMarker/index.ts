@@ -64,7 +64,11 @@ export class BoundaryMarker {
     const isPlayer2SideFull =
       this.player2Cards.length === this.maximumCardNumber;
 
-    if (!isPlayer1SideFull || !isPlayer2SideFull) {
+    if (
+      !isPlayer1SideFull ||
+      !isPlayer2SideFull ||
+      !this.firstPlayerToComplete
+    ) {
       throw new RangeError('BOUNDARY_CANNOT_BE_CLAIMED');
     }
 
@@ -80,10 +84,6 @@ export class BoundaryMarker {
       player1Combination,
       player2Combination,
     );
-
-    if (!this.firstPlayerToComplete) {
-      throw new Error('CLAIM_WITHOUT_COMPLETION');
-    }
 
     if (winner === 'TIE') {
       this.owner = this.firstPlayerToComplete;

@@ -13,19 +13,38 @@ describe('Component SchottenTottenGame.playCard()', () => {
         drawFrom: 'CLAN_CARDS',
       });
 
-      it('Then the card is player on the boundary marker 0', () => {
+      it('Then the card is played on the boundary marker 0', () => {
         expect(
           game.readState().boundaryMarkers[0].player1Cards.length,
         ).toStrictEqual(1);
       });
 
-      it('Then next player is player 2', () => {
-        expect(game.readState().currentPlayerID).toStrictEqual(STGame.PLAYER_2);
+      it('Then it is still player 1 turn in case he want to claim', () => {
+        expect(game.readState().currentPlayerID).toStrictEqual(STGame.PLAYER_1);
       });
+    });
+
+    describe('When player 2 tries plays a card during player 1 turn', () => {
+      const game = new STGame('John', 'Sarah', {});
+      game.startGame();
+
+      let error;
+      try {
+        game.playCard({
+          playerID: STGame.PLAYER_2,
+          boundaryMarkerIndex: 0,
+          cardIndex: 0,
+          drawFrom: 'CLAN_CARDS',
+        });
+      } catch (err: any) {
+        error = err;
+      }
+
+      expect(error.message).toStrictEqual('NOT_YOUR_TURN');
     });
   });
 
-  describe('Given a Game and player 1 just played', () => {
+  describe('Given a Game and player 1 just played and not end his turn', () => {
     const game = new STGame('John', 'Sarah', {});
     game.startGame();
 
@@ -37,7 +56,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
     });
 
     describe('When player 1 tries to plays again', () => {
-      it('Then it throws a NOT_YOUR_TURN error', () => {
+      it('Then it throws a CARD_PLAYED_ALREADY error', () => {
         let error;
         try {
           game.playCard({
@@ -50,7 +69,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
           error = err;
         }
 
-        expect(error.message).toStrictEqual('NOT_YOUR_TURN');
+        expect(error.message).toStrictEqual('CARD_PLAYED_ALREADY');
       });
     });
   });
@@ -111,6 +130,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
+    game.endTurn();
 
     game.playCard({
       playerID: STGame.PLAYER_2,
@@ -118,6 +138,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
+    game.endTurn();
 
     game.playCard({
       playerID: STGame.PLAYER_1,
@@ -125,6 +146,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
+    game.endTurn();
 
     game.playCard({
       playerID: STGame.PLAYER_2,
@@ -132,6 +154,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
+    game.endTurn();
 
     game.playCard({
       playerID: STGame.PLAYER_1,
@@ -139,6 +162,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
+    game.endTurn();
 
     game.playCard({
       playerID: STGame.PLAYER_2,
@@ -146,6 +170,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       cardIndex: 0,
       drawFrom: 'CLAN_CARDS',
     });
+    game.endTurn();
 
     describe('When player 1 tries to plays on that boundary', () => {
       it('Then it throws a BOUNDARY_MARKER_IS_FULL error', () => {

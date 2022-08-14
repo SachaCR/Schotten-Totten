@@ -7,6 +7,7 @@ import { WinnerChecker } from '../WinnerChecker';
 export type PlayerID = '1' | '2';
 
 export type GameStatus = 'INITIATED' | 'STARTED' | 'GAME OVER';
+
 export type GameState = {
   player1: PlayerState;
   player2: PlayerState;
@@ -26,6 +27,7 @@ export class STGame {
   private cardDeck: CardDeck;
   private boundaryMarkers: BoundaryMarker[];
   private currentPlayerID: PlayerID;
+  private isCardPlayed: boolean;
   private winner: PlayerID | 'NOBODY';
   private status: GameStatus;
 
@@ -38,6 +40,7 @@ export class STGame {
     this.cardDeck = new CardDeck();
     this.currentPlayerID = STGame.PLAYER_1;
     this.status = 'INITIATED';
+    this.isCardPlayed = false;
 
     for (let i = 0; i < 9; i++) {
       this.boundaryMarkers.push(new BoundaryMarker());
@@ -45,6 +48,10 @@ export class STGame {
   }
 
   shuffleDecks(): void {
+    if (this.status !== 'INITIATED') {
+      return;
+    }
+
     this.cardDeck.shuffleDeck();
   }
 
@@ -82,6 +89,10 @@ export class STGame {
 
     if (!this.isItPlayerTurn(playerID)) {
       throw new RangeError('NOT_YOUR_TURN');
+    }
+
+    if (this.isCardPlayed) {
+      throw new RangeError('CARD_PLAYED_ALREADY');
     }
 
     if (!this.isboundaryMarkerIndexValid(boundaryMarkerIndex)) {
@@ -125,10 +136,19 @@ export class STGame {
       player.receiveCard(newCard);
     }
 
+    this.isCardPlayed = true;
+  }
+
+  endTurn(): void {
+    if (!this.isCardPlayed) {
+      throw new Error('PLAYER_HAS_NOT_PLAYED');
+    }
+
     this.currentPlayerID =
       this.currentPlayerID === STGame.PLAYER_1
         ? STGame.PLAYER_2
         : STGame.PLAYER_1;
+    this.isCardPlayed = false;
   }
 
   claimBoundaryMarker(params: {
