@@ -1,7 +1,7 @@
 import color from 'ansi-colors';
 import { CardDetails, GameState, PlayerID, PlayerState } from '../../domain';
 import { BoundaryMarkerState } from '../../domain/BoundaryMarker';
-import { NanoGameId } from '../../domain/GameId';
+import { UuidGameId } from '../../domain/GameId';
 
 export class GameTextRenderer {
   static cardToString(cardDetails: CardDetails): string {
@@ -112,7 +112,7 @@ export class GameTextRenderer {
 }
 
 const gameState: GameState = {
-  gameId: new NanoGameId(),
+  gameId: new UuidGameId(),
   boundaryMarkers: [
     {
       maximumCardNumber: 3,
