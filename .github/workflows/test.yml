@@ -18,11 +18,18 @@ jobs:
         with:
           node-version: 18.8.0
 
-      - name: Test
+      - name: Install dependencies
         run: |
           npm install
+
+      - name: Tests
+        run: |
           npm test
 
       - name: Build
         run: |
           npm run build
+
+      - name: Type Documentation
+        run: |
+          npm run doc
