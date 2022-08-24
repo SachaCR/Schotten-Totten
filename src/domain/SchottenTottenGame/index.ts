@@ -5,7 +5,7 @@ import {
 } from '../BoundaryMarker';
 import { Card } from '../Card';
 import { CardDeck as CardDeck } from '../CardDeck';
-import { GameId, NanoGameId } from '../GameId';
+import { GameId, UuidGameId } from '../GameId';
 import { Player, PlayerState } from '../Player';
 import { WinnerChecker } from '../WinnerChecker';
 
@@ -51,7 +51,7 @@ export class STGame {
   private status: GameStatus;
 
   constructor(player1Name: string, player2Name: string, options?: any) {
-    this.gameId = new NanoGameId();
+    this.gameId = new UuidGameId();
     this.winner = 'NOBODY';
     this.playerMaxCardInHands = 6;
     this.boundaryMarkers = [];

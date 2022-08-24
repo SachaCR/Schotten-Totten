@@ -4,7 +4,7 @@ export interface GameId {
   value(): string;
 }
 
-export class NanoGameId implements GameId {
+export class UuidGameId implements GameId {
   private id: string;
 
   constructor() {
