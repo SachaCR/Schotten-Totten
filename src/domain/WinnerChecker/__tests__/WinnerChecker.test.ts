@@ -5,15 +5,15 @@ import { STGame } from '../../SchottenTottenGame';
 
 describe('Component WinnerChecker', () => {
   describe('Given a boundary markers list', () => {
-    const marker1 = new BoundaryMarker();
-    const marker2 = new BoundaryMarker();
-    const marker3 = new BoundaryMarker();
-    const marker4 = new BoundaryMarker();
-    const marker5 = new BoundaryMarker();
-    const marker6 = new BoundaryMarker();
-    const marker7 = new BoundaryMarker();
-    const marker8 = new BoundaryMarker();
-    const marker9 = new BoundaryMarker();
+    const marker1 = new BoundaryMarker('A');
+    const marker2 = new BoundaryMarker('A');
+    const marker3 = new BoundaryMarker('A');
+    const marker4 = new BoundaryMarker('A');
+    const marker5 = new BoundaryMarker('A');
+    const marker6 = new BoundaryMarker('A');
+    const marker7 = new BoundaryMarker('A');
+    const marker8 = new BoundaryMarker('A');
+    const marker9 = new BoundaryMarker('A');
 
     marker1.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
     marker1.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
@@ -109,15 +109,15 @@ describe('Component WinnerChecker', () => {
   });
 
   describe('Given a boundary markers list', () => {
-    const marker1 = new BoundaryMarker();
-    const marker2 = new BoundaryMarker();
-    const marker3 = new BoundaryMarker();
-    const marker4 = new BoundaryMarker();
-    const marker5 = new BoundaryMarker();
-    const marker6 = new BoundaryMarker();
-    const marker7 = new BoundaryMarker();
-    const marker8 = new BoundaryMarker();
-    const marker9 = new BoundaryMarker();
+    const marker1 = new BoundaryMarker('A');
+    const marker2 = new BoundaryMarker('A');
+    const marker3 = new BoundaryMarker('A');
+    const marker4 = new BoundaryMarker('A');
+    const marker5 = new BoundaryMarker('A');
+    const marker6 = new BoundaryMarker('A');
+    const marker7 = new BoundaryMarker('A');
+    const marker8 = new BoundaryMarker('A');
+    const marker9 = new BoundaryMarker('A');
 
     marker1.addCard(STGame.PLAYER_2, new Card(1, 'blue'));
     marker1.addCard(STGame.PLAYER_2, new Card(2, 'blue'));
@@ -165,15 +165,15 @@ describe('Component WinnerChecker', () => {
   });
 
   describe('Given a boundary markers list', () => {
-    const marker1 = new BoundaryMarker();
-    const marker2 = new BoundaryMarker();
-    const marker3 = new BoundaryMarker();
-    const marker4 = new BoundaryMarker();
-    const marker5 = new BoundaryMarker();
-    const marker6 = new BoundaryMarker();
-    const marker7 = new BoundaryMarker();
-    const marker8 = new BoundaryMarker();
-    const marker9 = new BoundaryMarker();
+    const marker1 = new BoundaryMarker('A');
+    const marker2 = new BoundaryMarker('A');
+    const marker3 = new BoundaryMarker('A');
+    const marker4 = new BoundaryMarker('A');
+    const marker5 = new BoundaryMarker('A');
+    const marker6 = new BoundaryMarker('A');
+    const marker7 = new BoundaryMarker('A');
+    const marker8 = new BoundaryMarker('A');
+    const marker9 = new BoundaryMarker('A');
 
     marker1.addCard(STGame.PLAYER_2, new Card(1, 'blue'));
     marker1.addCard(STGame.PLAYER_2, new Card(2, 'blue'));

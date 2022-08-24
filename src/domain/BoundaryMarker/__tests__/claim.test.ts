@@ -4,7 +4,7 @@ import { STGame } from '../../SchottenTottenGame';
 
 describe('Component BoundaryMarker.claim()', () => {
   describe('Given an empty BoundaryMarker', () => {
-    const boundaryMarker = new BoundaryMarker();
+    const boundaryMarker = new BoundaryMarker('A');
 
     describe('When there is a claim', () => {
       it('Then it throws an error', () => {
@@ -21,7 +21,7 @@ describe('Component BoundaryMarker.claim()', () => {
   });
 
   describe('Given a full BoundaryMarker', () => {
-    const boundaryMarker = new BoundaryMarker();
+    const boundaryMarker = new BoundaryMarker('A');
     describe('With a color suite for player 1', () => {
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
@@ -44,7 +44,7 @@ describe('Component BoundaryMarker.claim()', () => {
   });
 
   describe('Given a full BoundaryMarker', () => {
-    const boundaryMarker = new BoundaryMarker();
+    const boundaryMarker = new BoundaryMarker('A');
     describe('With a color suite for player 1', () => {
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));

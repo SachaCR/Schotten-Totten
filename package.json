@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/SachaCR.Schotten-Totten.git"
   },
-  "author": "BankingTeam",
+  "author": "SachaCR",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SachaCR/Schotten-Totten.issues"
@@ -23,13 +23,17 @@
   "homepage": "https://github.com/SachaCR#Schotten-Totten.readme",
   "dependencies": {
     "ansi-colors": "^4.1.3",
+    "dyal": "^1.0.11",
     "jest": "^27.5.1",
     "jest-html-reporters": "^3.0.10",
-    "typedoc": "^0.23.10"
+    "typedoc": "^0.23.10",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@tsconfig/node18": "^1.0.1",
     "@types/ansi-colors": "^3.2.2",
     "@types/jest": "27.4.1",
+    "@types/uuid": "^8.3.4",
     "prettier": "2.6.1",
     "ts-jest": "27.1.4",
     "ts-node": "10.7.0",
@@ -82,7 +86,7 @@
     "exec": "ts-node src/index.ts"
   },
   "volta": {
-    "node": "16.16.0",
+    "node": "18.8.0",
     "npm": "8.17.0"
   }
 }

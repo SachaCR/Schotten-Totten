@@ -5,7 +5,7 @@ import { STGame } from '../../SchottenTottenGame';
 describe('Component BoundaryMarker.addCard()', () => {
   describe('Given an empty BoundaryMarker', () => {
     describe('When player 1 adds a card', () => {
-      const boundaryMarker = new BoundaryMarker();
+      const boundaryMarker = new BoundaryMarker('A');
       boundaryMarker.addCard('1', new Card(1, 'blue'));
 
       it('Then player 1 cards contains the card', () => {
@@ -25,7 +25,7 @@ describe('Component BoundaryMarker.addCard()', () => {
 
   describe('Given a empty BoundaryMarker', () => {
     describe('When player 2 adds a card', () => {
-      const boundaryMarker = new BoundaryMarker();
+      const boundaryMarker = new BoundaryMarker('A');
       boundaryMarker.addCard('2', new Card(1, 'blue'));
 
       it('Then player  cards contains the card', () => {
@@ -45,7 +45,7 @@ describe('Component BoundaryMarker.addCard()', () => {
 
   describe('Given a BoundaryMarker', () => {
     describe('With 2 cards on player 1 side ', () => {
-      const boundaryMarker = new BoundaryMarker();
+      const boundaryMarker = new BoundaryMarker('A');
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
 
@@ -84,7 +84,7 @@ describe('Component BoundaryMarker.addCard()', () => {
 
   describe('Given a BoundaryMarker', () => {
     describe('With 3 cards on player 1 side and 2 on player 2 side', () => {
-      const boundaryMarker = new BoundaryMarker();
+      const boundaryMarker = new BoundaryMarker('A');
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(3, 'blue'));
@@ -108,7 +108,7 @@ describe('Component BoundaryMarker.addCard()', () => {
 
   describe('Given a BoundaryMarker', () => {
     describe('With 3 cards on player 1 ', () => {
-      const boundaryMarker = new BoundaryMarker();
+      const boundaryMarker = new BoundaryMarker('A');
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(1, 'blue'));
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(2, 'blue'));
       boundaryMarker.addCard(STGame.PLAYER_1, new Card(3, 'blue'));

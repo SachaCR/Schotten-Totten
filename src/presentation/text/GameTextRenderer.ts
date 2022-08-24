@@ -1,5 +1,7 @@
 import color from 'ansi-colors';
 import { CardDetails, GameState, PlayerID, PlayerState } from '../../domain';
+import { BoundaryMarkerState } from '../../domain/BoundaryMarker';
+import { NanoGameId } from '../../domain/GameId';
 
 export class GameTextRenderer {
   static cardToString(cardDetails: CardDetails): string {
@@ -34,47 +36,63 @@ export class GameTextRenderer {
       winner,
     } = gameState;
 
-    const markersStrings = boundaryMarkers.map((marker, index) => {
-      const player1CardStrings = marker.player1Cards.map((card) => {
-        return `${this.cardToString(card)}`;
-      });
+    const playerInfoString = this.playerInfoToString(player1, player2);
 
-      const player2CardStrings = marker.player2Cards.map((card) => {
-        return `${this.cardToString(card)}`;
-      });
+    const currentPlayerString = this.currentPlayerToString(currentPlayerID);
 
-      return `\t\t${player1CardStrings} \t[ M${
-        index + 1
-      } ]\t ${player2CardStrings} \n`;
-    });
+    const markerStrings = boundaryMarkers.map(this.markerToString);
+    const markerString = markerStrings.reduce((result, line) => {
+      return (result += line);
+    }, '');
 
     const currentPlayerCards =
       currentPlayerID === '1' ? player1.cards : player2.cards;
 
-    const currentPlayerCardStrings = currentPlayerCards.map((card) => {
-      return `${this.cardToString(card)}`;
-    });
-
-    const markerString = markersStrings.reduce((result, line) => {
-      return (result += line);
-    }, '');
-
-    const playerInfoString = this.playerInfoToString(player1, player2);
-    const currentPlayerString = this.currentPlayerToString(currentPlayerID);
+    const currentPlayerCardStrings = currentPlayerCards.reduce(
+      (resultString, card) => {
+        resultString += `${this.cardToString(card)} `;
+        return resultString;
+      },
+      'Your hand: ',
+    );
 
     return (
+      '\n' +
       playerInfoString +
+      '\n' +
       currentPlayerString +
       '\n' +
       markerString +
       '\n' +
-      'Your hand: ' +
-      currentPlayerCardStrings
+      currentPlayerCardStrings +
+      '\n'
     );
   }
 
-  static markerToString(): string {
-    return '';
+  static markerToString(marker: BoundaryMarkerState): string {
+    const player1CardStrings = marker.player1Cards.map((card) => {
+      return `${GameTextRenderer.cardToString(card)}`;
+    });
+
+    const player2CardStrings = marker.player2Cards.map((card) => {
+      return `${GameTextRenderer.cardToString(card)}`;
+    });
+
+    let markerString: string;
+
+    if (marker.owner === '1') {
+      markerString = color.green('<') + `[ ${marker.id} ] `;
+    } else if (marker.owner === '2') {
+      markerString = ` [ ${marker.id} ]` + color.green('>');
+    } else if (marker.firstPlayerToComplete === '1') {
+      markerString = `·[ ${marker.id} ] `;
+    } else if (marker.firstPlayerToComplete === '2') {
+      markerString = ` [ ${marker.id} ]·`;
+    } else {
+      markerString = ` [ ${marker.id} ] `;
+    }
+
+    return `\t\t${player1CardStrings}\t${markerString}\t  ${player2CardStrings}\n`;
   }
 
   static currentPlayerToString(currentPlayerID: PlayerID): string {
@@ -94,6 +112,7 @@ export class GameTextRenderer {
 }
 
 const gameState: GameState = {
+  gameId: new NanoGameId(),
   boundaryMarkers: [
     {
       maximumCardNumber: 3,
@@ -121,62 +140,135 @@ const gameState: GameState = {
           color: 'green',
           value: 4,
         },
+      ],
+      id: 'A',
+      firstPlayerToComplete: '1',
+    },
+    {
+      maximumCardNumber: 3,
+      owner: 'NOBODY',
+      player1Cards: [],
+      player2Cards: [],
+      id: 'B',
+    },
+    {
+      maximumCardNumber: 3,
+      owner: 'NOBODY',
+      player1Cards: [],
+      player2Cards: [],
+      id: 'C',
+    },
+    {
+      maximumCardNumber: 3,
+      owner: '2',
+      player1Cards: [
         {
-          color: 'orange',
-          value: 5,
+          color: 'blue',
+          value: 2,
+        },
+        {
+          color: 'purple',
+          value: 7,
+        },
+        {
+          color: 'yellow',
+          value: 4,
         },
       ],
+      player2Cards: [
+        {
+          color: 'brown',
+          value: 8,
+        },
+        {
+          color: 'green',
+          value: 9,
+        },
+        {
+          color: 'orange',
+          value: 9,
+        },
+      ],
+      id: 'D',
     },
     {
       maximumCardNumber: 3,
       owner: 'NOBODY',
       player1Cards: [],
       player2Cards: [],
+      id: 'E',
     },
     {
       maximumCardNumber: 3,
       owner: 'NOBODY',
       player1Cards: [],
       player2Cards: [],
+      id: 'F',
+    },
+    {
+      firstPlayerToComplete: '1',
+      maximumCardNumber: 3,
+      owner: '1',
+      player1Cards: [
+        {
+          color: 'blue',
+          value: 4,
+        },
+        {
+          color: 'purple',
+          value: 6,
+        },
+        {
+          color: 'yellow',
+          value: 9,
+        },
+      ],
+      player2Cards: [
+        {
+          color: 'brown',
+          value: 9,
+        },
+        {
+          color: 'green',
+          value: 2,
+        },
+        {
+          color: 'orange',
+          value: 1,
+        },
+      ],
+      id: 'G',
     },
     {
       maximumCardNumber: 3,
       owner: 'NOBODY',
       player1Cards: [],
       player2Cards: [],
+      id: 'H',
     },
     {
+      firstPlayerToComplete: '2',
       maximumCardNumber: 3,
       owner: 'NOBODY',
       player1Cards: [],
-      player2Cards: [],
-    },
-    {
-      maximumCardNumber: 3,
-      owner: 'NOBODY',
-      player1Cards: [],
-      player2Cards: [],
-    },
-    {
-      maximumCardNumber: 3,
-      owner: 'NOBODY',
-      player1Cards: [],
-      player2Cards: [],
-    },
-    {
-      maximumCardNumber: 3,
-      owner: 'NOBODY',
-      player1Cards: [],
-      player2Cards: [],
-    },
-    {
-      maximumCardNumber: 3,
-      owner: 'NOBODY',
-      player1Cards: [],
-      player2Cards: [],
+      player2Cards: [
+        {
+          color: 'orange',
+          value: 3,
+        },
+        {
+          color: 'green',
+          value: 3,
+        },
+        {
+          color: 'blue',
+          value: 3,
+        },
+      ],
+      id: 'I',
     },
   ],
-  currentPlayerID: '1',
+  currentPlayerID: '2',
   player1: {
     cards: [
       {
@@ -195,7 +287,20 @@ const gameState: GameState = {
     name: 'Sacha',
   },
   player2: {
-    cards: [],
+    cards: [
+      {
+        color: 'orange',
+        value: 8,
+      },
+      {
+        color: 'blue',
+        value: 9,
+      },
+      {
+        color: 'orange',
+        value: 7,
+      },
+    ],
     name: 'John',
   },
   status: 'INITIATED',
