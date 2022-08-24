@@ -65,7 +65,7 @@
       [
         "jest-html-reporters",
         {
-          "publicPath": "./test-report",
+          "publicPath": "./documentation/test-report",
           "filename": "index.html",
           "openReport": false,
           "pageTitle": "Test Report"
