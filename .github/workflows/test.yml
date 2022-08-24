@@ -34,7 +34,7 @@ jobs:
         run: |
           npm run doc
 
-      - name: Deploy test-report🚀
+      - name: Deploy documentation 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: test-report
+          folder: documentation

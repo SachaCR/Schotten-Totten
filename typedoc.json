@@ -4,7 +4,7 @@
   "name": "Schotten Totten",
   "theme": "default",
   "entryPoints": ["index.ts"],
-  "out": "docs",
+  "out": "documentation/typedoc",
   "tsconfig": "tsconfig.json",
   "excludePrivate": true,
   "excludeProtected": true,
