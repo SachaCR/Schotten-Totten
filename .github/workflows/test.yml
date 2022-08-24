@@ -33,3 +33,17 @@ jobs:
       - name: Type Documentation
         run: |
           npm run doc
+
+      - name: Upload test-report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: |
+            test-report
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: |
+            coverage
