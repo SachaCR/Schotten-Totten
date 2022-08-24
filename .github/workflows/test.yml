@@ -34,16 +34,7 @@ jobs:
         run: |
           npm run doc
 
-      - name: Upload test-report
-        uses: actions/upload-artifact@v3
+      - name: Deploy test-report🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: test-report
-          path: |
-            test-report
-
-      - name: Upload coverage
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage
-          path: |
-            coverage
+          folder: test-report
