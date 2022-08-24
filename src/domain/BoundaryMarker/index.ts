@@ -3,6 +3,16 @@ import { CombinationChecker } from '../CombinationChecker';
 import { PlayerID, STGame } from '../SchottenTottenGame';
 
 export type BoundaryMarkerOwner = '1' | '2' | 'NOBODY';
+export type BoundaryMarkerIds =
+  | 'A'
+  | 'B'
+  | 'C'
+  | 'D'
+  | 'E'
+  | 'F'
+  | 'G'
+  | 'H'
+  | 'I';
 
 export type BoundaryMarkerState = {
   owner: BoundaryMarkerOwner;
@@ -10,6 +20,7 @@ export type BoundaryMarkerState = {
   player2Cards: CardDetails[];
   firstPlayerToComplete?: PlayerID;
   maximumCardNumber: number;
+  id: BoundaryMarkerIds;
 };
 
 export class BoundaryMarker {
@@ -18,16 +29,19 @@ export class BoundaryMarker {
   private firstPlayerToComplete: PlayerID | undefined;
   private player1Cards: Card[];
   private player2Cards: Card[];
+  private id: BoundaryMarkerIds;
 
-  constructor() {
+  constructor(id: BoundaryMarkerIds) {
     this.owner = 'NOBODY';
     this.player1Cards = [];
     this.player2Cards = [];
     this.maximumCardNumber = 3;
+    this.id = id;
   }
 
   readState(): BoundaryMarkerState {
     return {
+      id: this.id,
       owner: this.owner,
       player1Cards: this.player1Cards.map((card) => card.readCard()),
       player2Cards: this.player2Cards.map((card) => card.readCard()),

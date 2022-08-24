@@ -1,14 +1,32 @@
-import { BoundaryMarker, BoundaryMarkerState } from '../BoundaryMarker';
+import {
+  BoundaryMarker,
+  BoundaryMarkerIds,
+  BoundaryMarkerState,
+} from '../BoundaryMarker';
 import { Card } from '../Card';
 import { CardDeck as CardDeck } from '../CardDeck';
+import { GameId, NanoGameId } from '../GameId';
 import { Player, PlayerState } from '../Player';
 import { WinnerChecker } from '../WinnerChecker';
+
+const boundaryMarkersIds: BoundaryMarkerIds[] = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+];
 
 export type PlayerID = '1' | '2';
 
 export type GameStatus = 'INITIATED' | 'STARTED' | 'GAME OVER';
 
 export type GameState = {
+  gameId: GameId;
   player1: PlayerState;
   player2: PlayerState;
   boundaryMarkers: BoundaryMarkerState[];
@@ -21,6 +39,7 @@ export class STGame {
   static PLAYER_1: PlayerID = '1';
   static PLAYER_2: PlayerID = '2';
 
+  private gameId: GameId;
   private playerMaxCardInHands: number;
   private player1: Player;
   private player2: Player;
@@ -32,6 +51,7 @@ export class STGame {
   private status: GameStatus;
 
   constructor(player1Name: string, player2Name: string, options?: any) {
+    this.gameId = new NanoGameId();
     this.winner = 'NOBODY';
     this.playerMaxCardInHands = 6;
     this.boundaryMarkers = [];
@@ -42,9 +62,9 @@ export class STGame {
     this.status = 'INITIATED';
     this.isCardPlayed = false;
 
-    for (let i = 0; i < 9; i++) {
-      this.boundaryMarkers.push(new BoundaryMarker());
-    }
+    boundaryMarkersIds.forEach((id) => {
+      this.boundaryMarkers.push(new BoundaryMarker(id));
+    });
   }
 
   shuffleDecks(): void {
@@ -179,6 +199,7 @@ export class STGame {
 
   readState(): GameState {
     return {
+      gameId: this.gameId,
       player1: this.player1.readState(),
       player2: this.player2.readState(),
       boundaryMarkers: this.boundaryMarkers.map((bm) => bm.readState()),

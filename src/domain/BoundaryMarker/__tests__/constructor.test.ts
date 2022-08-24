@@ -3,7 +3,7 @@ import { BoundaryMarker } from '../';
 describe('Component BoundaryMarker', () => {
   describe('Given I want to create a BoundaryMarker', () => {
     describe('When I create a new instance', () => {
-      const boundaryMarker = new BoundaryMarker();
+      const boundaryMarker = new BoundaryMarker('A');
 
       it('Then the owner is NOBODY', () => {
         expect(boundaryMarker.readState().owner).toStrictEqual('NOBODY');
