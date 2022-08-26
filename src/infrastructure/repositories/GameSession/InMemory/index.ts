@@ -9,9 +9,9 @@ export function buildGameSessionInMemory(): GameSessionRepository {
       games.push(game);
     },
     getById: async (id: GameId): Promise<STGame | undefined> => {
-      return games.find(
-        (game) => game.readState().gameId.value() === id.value(),
-      );
+      return games.find((game) => {
+        return game.readState().gameId.value() === id.value();
+      });
     },
   };
 }

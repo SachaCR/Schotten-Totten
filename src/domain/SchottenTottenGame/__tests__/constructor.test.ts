@@ -1,6 +1,10 @@
-import { STGame } from '../../';
+import { STGame, cardColors } from '../../../../';
 
 describe('Component SchottenTottenGame', () => {
+  it('It export cardColors', () => {
+    expect(cardColors).toBeDefined();
+  });
+
   describe('Given I want to start a SchottenTottenGame', () => {
     describe('When I create a new SchottenTottenGame()', () => {
       const game = new STGame('John', 'Sarah', {});
