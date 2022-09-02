@@ -2,7 +2,7 @@ import { Context, Next } from 'dyal';
 import { AppDependencies } from '..';
 import { DomainError } from '../../domain';
 import { InfrastructureError } from '../../infrastructure';
-import { AppCrashError, ApplicationError } from '../Errors';
+import { AppCrashError, ApplicationError } from '../errors';
 
 export async function errorHandlerMiddleware(
   ctx: Context<AppDependencies, any, any>,

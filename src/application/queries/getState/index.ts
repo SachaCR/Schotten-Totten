@@ -1,7 +1,7 @@
 import { Query, Context } from 'dyal';
 import { GameState, UuidGameId } from '../../../domain';
 import { AppDependencies } from '../..';
-import { NotFoundError } from '../../Errors';
+import { NotFoundError } from '../../errors';
 
 type GetStateQueryContext = Context<
   AppDependencies,
