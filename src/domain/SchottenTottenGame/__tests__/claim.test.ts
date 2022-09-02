@@ -1,4 +1,5 @@
 import { STGame } from '../';
+import { DomainError } from '../../Errors';
 
 describe('Component SchottenTottenGame.claim()', () => {
   describe('Given a Game', () => {
@@ -15,10 +16,18 @@ describe('Component SchottenTottenGame.claim()', () => {
               playerID: STGame.PLAYER_1,
             });
           } catch (err: any) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('BOUNDARY_CANNOT_BE_CLAIMED');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual(
+                'This boundary marker cannot be claimed',
+              );
+            }
+
             error = err;
           }
 
-          expect(error.message).toStrictEqual('BOUNDARY_CANNOT_BE_CLAIMED');
+          expect(error).toBeInstanceOf(DomainError);
         });
       });
     });
@@ -36,11 +45,17 @@ describe('Component SchottenTottenGame.claim()', () => {
               boundaryMarkerIndex: 0,
               playerID: STGame.PLAYER_2,
             });
-          } catch (err: any) {
+          } catch (err: unknown) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('NOT_YOUR_TURN');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual(`It's not your turn to play`);
+            }
+
             error = err;
           }
 
-          expect(error.message).toStrictEqual('NOT_YOUR_TURN');
+          expect(error).toBeInstanceOf(DomainError);
         });
       });
     });
@@ -58,11 +73,17 @@ describe('Component SchottenTottenGame.claim()', () => {
               boundaryMarkerIndex: 11,
               playerID: STGame.PLAYER_1,
             });
-          } catch (err: any) {
+          } catch (err: unknown) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('INVALID_BOUNDARY_ID');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual('This boundary id is invalid');
+            }
+
             error = err;
           }
 
-          expect(error.message).toStrictEqual('INVALID_BOUNDARY_ID');
+          expect(error).toBeInstanceOf(DomainError);
         });
       });
     });

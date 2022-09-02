@@ -1,4 +1,5 @@
 import { Card, CardDetails } from '../Card';
+import { InvalidCardIndexError } from '../errors';
 
 export type PlayerState = {
   name: string;
@@ -35,7 +36,7 @@ export class Player {
 
   playCard(cardIndex: number): Card {
     if (cardIndex >= this.cards.length || cardIndex < 0) {
-      throw new RangeError('INVALID_CARD_INDEX');
+      throw new InvalidCardIndexError();
     }
 
     const card = this.cards.splice(cardIndex, 1)[0];

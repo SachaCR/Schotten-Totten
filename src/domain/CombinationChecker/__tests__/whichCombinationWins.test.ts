@@ -1,4 +1,5 @@
 import { CombinationChecker, CombinationDetails } from '../';
+import { DomainError } from '../../Errors';
 
 describe('Component CombinationChecker.whichCombinationWins()', () => {
   const combination1Wins: CombinationDetails[][] = [
@@ -159,11 +160,19 @@ describe('Component CombinationChecker.whichCombinationWins()', () => {
         let error;
         try {
           CombinationChecker.whichCombinationWins(combination1, combination2);
-        } catch (err: any) {
+        } catch (err: unknown) {
+          if (err instanceof DomainError) {
+            expect(err.code).toStrictEqual('COMBINATION_RANK_NOT_FOUND');
+            expect(err.name).toStrictEqual('DOMAIN_ERROR');
+            expect(err.message).toStrictEqual(
+              'There is no combination rank for this combination',
+            );
+          }
+
           error = err;
         }
 
-        expect(error.message).toStrictEqual('COMBINATION_RANK_NOT_FOUND');
+        expect(error).toBeInstanceOf(DomainError);
       });
     });
   });

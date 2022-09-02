@@ -1,4 +1,6 @@
 import { CardColor, CardDetails } from '../Card';
+import { CombinationRankNotFoundError } from '../errors';
+import { PlayerID } from '../SchottenTottenGame';
 
 export type CombinationTypes =
   | 'sum'
@@ -124,28 +126,28 @@ export class CombinationChecker {
   static whichCombinationWins(
     combination1: CombinationDetails,
     combination2: CombinationDetails,
-  ): '1' | '2' | 'TIE' {
+  ): PlayerID | 'TIE' {
     const combination1Rank = combinationRankMap.get(combination1.name);
     const combination2Rank = combinationRankMap.get(combination2.name);
 
     if (!combination1Rank || !combination2Rank) {
-      throw new RangeError('COMBINATION_RANK_NOT_FOUND');
+      throw new CombinationRankNotFoundError();
     }
 
     if (combination1Rank > combination2Rank) {
-      return '1';
+      return PlayerID.ONE;
     }
 
     if (combination1Rank < combination2Rank) {
-      return '2';
+      return PlayerID.TWO;
     }
 
     if (combination1.value > combination2.value) {
-      return '1';
+      return PlayerID.ONE;
     }
 
     if (combination1.value < combination2.value) {
-      return '2';
+      return PlayerID.TWO;
     }
 
     return 'TIE';

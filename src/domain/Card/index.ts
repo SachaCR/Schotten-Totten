@@ -1,3 +1,5 @@
+import { InvalidCardColorError, InvalidCardValueError } from '../errors';
+
 export const cardColors = [
   'blue',
   'brown',
@@ -16,11 +18,11 @@ export class Card {
 
   constructor(value: number, color: CardColor) {
     if (value > 9 || value < 1) {
-      throw new RangeError('INVALID_CARD_VALUE');
+      throw new InvalidCardValueError();
     }
 
     if (!cardColors.includes(color)) {
-      throw new RangeError('INVALID_CARD_COLOR');
+      throw new InvalidCardColorError();
     }
 
     this.color = color;

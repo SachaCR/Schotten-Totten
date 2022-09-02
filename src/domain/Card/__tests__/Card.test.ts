@@ -1,4 +1,5 @@
 import { Card, CardColor, cardColors } from '../';
+import { DomainError } from '../../Errors';
 
 describe('Component: Card', () => {
   const testValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -34,10 +35,17 @@ describe('Component: Card', () => {
 
           try {
             new Card(invalidValue, validColor);
-          } catch (err: any) {
+          } catch (err: unknown) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('INVALID_CARD_VALUE');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual('Invalid card value');
+            }
+
             error = err;
           }
-          expect(error.message).toStrictEqual('INVALID_CARD_VALUE');
+
+          expect(error).toBeInstanceOf(DomainError);
         });
       });
     });
@@ -56,10 +64,17 @@ describe('Component: Card', () => {
           try {
             // @ts-expect-error
             new Card(validValue, invalidColor);
-          } catch (err: any) {
+          } catch (err: unknown) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('INVALID_CARD_COLOR');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual('Invalid card color');
+            }
+
             error = err;
           }
-          expect(error.message).toStrictEqual('INVALID_CARD_COLOR');
+
+          expect(error).toBeInstanceOf(DomainError);
         });
       });
     });

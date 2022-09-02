@@ -1,5 +1,6 @@
 import { Player } from '../';
 import { Card } from '../../Card';
+import { DomainError } from '../../Errors';
 
 describe('Component Player', () => {
   describe('Given a player whos name is John', () => {
@@ -98,22 +99,35 @@ describe('Component Player', () => {
           let error;
           try {
             player.playCard(-1);
-          } catch (err: any) {
+          } catch (err: unknown) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('INVALID_CARD_INDEX');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual('This card index is invalid');
+            }
+
             error = err;
           }
 
-          expect(error.message).toStrictEqual('INVALID_CARD_INDEX');
+          expect(error).toBeInstanceOf(DomainError);
         });
 
         it(`Then it throws a INVALID_CARD_INDEX error`, () => {
           let error;
+
           try {
             player.playCard(3);
-          } catch (err: any) {
+          } catch (err: unknown) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('INVALID_CARD_INDEX');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual('This card index is invalid');
+            }
+
             error = err;
           }
 
-          expect(error.message).toStrictEqual('INVALID_CARD_INDEX');
+          expect(error).toBeInstanceOf(DomainError);
         });
       });
     });

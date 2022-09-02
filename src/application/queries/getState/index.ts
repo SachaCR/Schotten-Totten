@@ -1,6 +1,7 @@
 import { Query, Context } from 'dyal';
 import { GameState, UuidGameId } from '../../../domain';
 import { AppDependencies } from '../..';
+import { NotFoundError } from '../../Errors';
 
 type GetStateQueryContext = Context<
   AppDependencies,
@@ -18,14 +19,9 @@ export interface GetStateQuery extends Query {
   };
 }
 
-export type GetStateQueryResult =
-  | {
-      outcome: 'game-found';
-      gameState: GameState;
-    }
-  | {
-      outcome: 'game-not-found';
-    };
+export type GetStateQueryResult = {
+  gameState: GameState;
+};
 
 async function getStateQueryHandler(
   ctx: GetStateQueryContext,
@@ -38,13 +34,10 @@ async function getStateQueryHandler(
   const game = await gameSessionRepository.getById(gameId);
 
   if (!game) {
-    return {
-      outcome: 'game-not-found',
-    };
+    throw new NotFoundError();
   }
 
   return {
-    outcome: 'game-found',
     gameState: game.readState(),
   };
 }

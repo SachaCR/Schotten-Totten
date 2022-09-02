@@ -1,5 +1,6 @@
 import { BoundaryMarker } from '../';
 import { Card } from '../../Card';
+import { DomainError } from '../../Errors';
 import { STGame } from '../../SchottenTottenGame';
 
 describe('Component BoundaryMarker.claim()', () => {
@@ -11,11 +12,19 @@ describe('Component BoundaryMarker.claim()', () => {
         let error;
         try {
           boundaryMarker.claim();
-        } catch (err: any) {
+        } catch (err: unknown) {
+          if (err instanceof DomainError) {
+            expect(err.code).toStrictEqual('BOUNDARY_CANNOT_BE_CLAIMED');
+            expect(err.name).toStrictEqual('DOMAIN_ERROR');
+            expect(err.message).toStrictEqual(
+              'This boundary marker cannot be claimed',
+            );
+          }
+
           error = err;
         }
 
-        expect(error.message).toStrictEqual('BOUNDARY_CANNOT_BE_CLAIMED');
+        expect(error).toBeInstanceOf(DomainError);
       });
     });
   });

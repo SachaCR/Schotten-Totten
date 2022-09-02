@@ -1,14 +1,21 @@
 import { createApp, createCommandBus, createQueryBus } from 'dyal';
 import { startGameCommand } from './commands/startGame';
+import { errorHandlerMiddleware } from './middlewares/errorHandler';
 import { getStateQuery } from './queries/getState';
 import { GameSessionRepository } from './repositories';
 
 export type AppDependencies = {
   gameSessionRepository: GameSessionRepository;
+  logger: {
+    info(message?: any, ...optionalParams: any[]): void;
+    warn(message?: any, ...optionalParams: any[]): void;
+    error(message?: any, ...optionalParams: any[]): void;
+  };
 };
 
 export function buildApp(dependencies: AppDependencies) {
   const app = createApp(dependencies);
+  app.use(errorHandlerMiddleware);
 
   const commandBus = createCommandBus();
   commandBus.register(startGameCommand.name, startGameCommand.handler);
@@ -20,3 +27,5 @@ export function buildApp(dependencies: AppDependencies) {
 
   return app;
 }
+
+export * from './errors';

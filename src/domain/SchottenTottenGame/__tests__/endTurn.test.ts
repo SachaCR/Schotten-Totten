@@ -1,4 +1,5 @@
-import { STGame } from '..';
+import { CardTypes, STGame } from '..';
+import { DomainError } from '../../Errors';
 
 describe('Component SchottenTottenGame.endTurn()', () => {
   describe('Given a Game that just started', () => {
@@ -10,7 +11,7 @@ describe('Component SchottenTottenGame.endTurn()', () => {
         playerID: STGame.PLAYER_1,
         boundaryMarkerIndex: 0,
         cardIndex: 0,
-        drawFrom: 'CLAN_CARDS',
+        drawFrom: CardTypes.CLAN_CARDS,
       });
       game.endTurn();
 
@@ -27,10 +28,18 @@ describe('Component SchottenTottenGame.endTurn()', () => {
       try {
         game.endTurn();
       } catch (err: any) {
+        if (err instanceof DomainError) {
+          expect(err.code).toStrictEqual('PLAYER_HAS_NOT_PLAYED');
+          expect(err.name).toStrictEqual('DOMAIN_ERROR');
+          expect(err.message).toStrictEqual(
+            `Player must play a card before ending turn`,
+          );
+        }
+
         error = err;
       }
 
-      expect(error.message).toStrictEqual('PLAYER_HAS_NOT_PLAYED');
+      expect(error).toBeInstanceOf(DomainError);
     });
   });
 });
