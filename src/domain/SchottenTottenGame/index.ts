@@ -8,7 +8,6 @@ import { CardDeck as CardDeck } from '../CardDeck';
 import {
   CardPlayedAlreadyError,
   DomainError,
-  DomainErrorCode,
   GameNotStartedOrOverError,
   GameOverError,
   InvalidBoundaryError,
