@@ -1,5 +1,5 @@
 import { Card, CardDetails } from '../Card';
-import { InvalidCardIndexError } from '../errors';
+import { InvalidCardIndexError } from '../domainError';
 
 export type PlayerState = {
   name: string;

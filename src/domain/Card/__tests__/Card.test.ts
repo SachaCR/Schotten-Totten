@@ -1,5 +1,5 @@
 import { Card, CardColor, cardColors } from '../';
-import { DomainError } from '../../errors';
+import { DomainError } from '../../domainError';
 
 describe('Component: Card', () => {
   const testValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];

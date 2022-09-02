@@ -3,7 +3,7 @@ import { CombinationChecker } from '../CombinationChecker';
 import {
   BoundaryCannotBeClaimedError,
   BoundaryMarkerIsFullError,
-} from '../errors';
+} from '../domainError';
 import { PlayerID, STGame } from '../SchottenTottenGame';
 
 export type BoundaryMarkerOwner = PlayerID.ONE | PlayerID.TWO | 'NOBODY';

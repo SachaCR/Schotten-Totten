@@ -1,12 +1,12 @@
-name: Test
+name: Publish Documentation
 
 on:
-  pull_request:
+  push:
     branches:
       - master
 
 jobs:
-  test:
+  publish-documentation:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,10 +21,15 @@ jobs:
           npm --version
           npm ci
 
-      - name: Tests
-        run: |
-          npm test
-
       - name: Build
         run: |
           npm run build
+
+      - name: Type Documentation
+        run: |
+          npm run doc
+
+      - name: Deploy documentation 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: documentation

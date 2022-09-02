@@ -1,5 +1,4 @@
-import { STGame } from '../';
-import { DomainError } from '../../errors';
+import { STGame, DomainError } from '../../';
 
 describe('Component SchottenTottenGame.claim()', () => {
   describe('Given a Game', () => {

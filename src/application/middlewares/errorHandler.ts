@@ -1,6 +1,6 @@
 import { Context, Next } from 'dyal';
 import { AppDependencies } from '..';
-import { DomainError } from '../../domain';
+import { DomainError } from '../../domain/domainError';
 import { InfrastructureError } from '../../infrastructure';
 import { AppCrashError, ApplicationError } from '../errors';
 
