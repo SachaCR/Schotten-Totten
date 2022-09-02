@@ -1,4 +1,4 @@
-import { DomainError, DomainErrorCode, GameOverError } from '../index';
+import { DomainError, DomainErrorCode, GameOverError } from '../';
 
 describe('Component DomainError', () => {
   describe('Given a DomainError type: GameOverError', () => {

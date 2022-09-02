@@ -3,7 +3,7 @@
   "includeVersion": true,
   "name": "Schotten Totten",
   "theme": "default",
-  "entryPoints": ["index.ts"],
+  "entryPoints": ["./index.ts"],
   "out": "documentation/typedoc",
   "tsconfig": "tsconfig.json",
   "excludePrivate": true,

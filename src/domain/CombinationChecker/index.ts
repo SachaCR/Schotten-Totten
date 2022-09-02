@@ -1,5 +1,5 @@
 import { CardColor, CardDetails } from '../Card';
-import { CombinationRankNotFoundError } from '../errors';
+import { CombinationRankNotFoundError } from '../domainError';
 import { PlayerID } from '../SchottenTottenGame';
 
 export type CombinationTypes =

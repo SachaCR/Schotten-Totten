@@ -15,7 +15,7 @@ import {
   NotEnoughCardInTheClanPileError,
   NotYourTurnError,
   PlayerHasNotPlayedError,
-} from '../errors';
+} from '../domainError';
 import { GameId, UuidGameId } from '../GameId';
 import { Player, PlayerState } from '../Player';
 import { WinnerChecker } from '../WinnerChecker';

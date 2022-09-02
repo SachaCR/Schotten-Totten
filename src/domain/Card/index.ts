@@ -1,4 +1,4 @@
-import { InvalidCardColorError, InvalidCardValueError } from '../errors';
+import { InvalidCardColorError, InvalidCardValueError } from '../domainError';
 
 export const cardColors = [
   'blue',

@@ -1,6 +1,6 @@
 import { BoundaryMarker } from '../';
 import { Card } from '../../Card';
-import { DomainError } from '../../errors';
+import { DomainError } from '../../domainError';
 import { STGame } from '../../SchottenTottenGame';
 
 describe('Component BoundaryMarker.claim()', () => {

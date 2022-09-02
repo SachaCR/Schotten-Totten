@@ -1,5 +1,5 @@
 import { CombinationChecker, CombinationDetails } from '../';
-import { DomainError } from '../../errors';
+import { DomainError } from '../../domainError';
 
 describe('Component CombinationChecker.whichCombinationWins()', () => {
   const combination1Wins: CombinationDetails[][] = [
