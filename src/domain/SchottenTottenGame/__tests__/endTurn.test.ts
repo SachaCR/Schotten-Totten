@@ -1,5 +1,5 @@
 import { CardTypes, STGame } from '..';
-import { DomainError } from '../../Errors';
+import { DomainError } from '../../errors';
 
 describe('Component SchottenTottenGame.endTurn()', () => {
   describe('Given a Game that just started', () => {

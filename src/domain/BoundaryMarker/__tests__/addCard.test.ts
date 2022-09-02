@@ -1,6 +1,6 @@
 import { BoundaryMarker } from '../';
 import { Card } from '../../Card';
-import { DomainError } from '../../Errors';
+import { DomainError } from '../../errors';
 import { PlayerID, STGame } from '../../SchottenTottenGame';
 
 describe('Component BoundaryMarker.addCard()', () => {

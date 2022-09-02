@@ -3,7 +3,7 @@ import { buildApp } from '../../..';
 import { STGame } from '../../../../domain';
 import { silentLogger } from '../../../../infrastructure';
 import { buildGameSessionInMemory } from '../../../../infrastructure/repositories/GameSession/InMemory';
-import { ApplicationError } from '../../../Errors';
+import { ApplicationError } from '../../../errors';
 
 describe('Component GetStateQuery', () => {
   describe('Given A game id', () => {

@@ -7,7 +7,7 @@ import {
   InvalidCommandError,
   NotFoundError,
   reshapeZodIssueIntoValidationError,
-} from '../../../application/Errors';
+} from '../../../application/errors';
 
 type PlayCardCommandContext = Context<
   AppDependencies,

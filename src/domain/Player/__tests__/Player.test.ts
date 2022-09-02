@@ -1,6 +1,6 @@
 import { Player } from '../';
 import { Card } from '../../Card';
-import { DomainError } from '../../Errors';
+import { DomainError } from '../../errors';
 
 describe('Component Player', () => {
   describe('Given a player whos name is John', () => {
