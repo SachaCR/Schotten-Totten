@@ -1,4 +1,4 @@
-import { STGame } from '../';
+import { CardTypes, STGame } from '../';
 
 describe('Component SchottenTottenGame()', () => {
   describe('Given an un-shuffled SchottenTottenGame', () => {
@@ -13,7 +13,7 @@ describe('Component SchottenTottenGame()', () => {
           playerID: STGame.PLAYER_1,
           cardIndex: 0,
           boundaryMarkerIndex,
-          drawFrom: 'CLAN_CARDS',
+          drawFrom: CardTypes.CLAN_CARDS,
         });
         game.endTurn();
 
@@ -21,7 +21,7 @@ describe('Component SchottenTottenGame()', () => {
           playerID: STGame.PLAYER_2,
           cardIndex: 0,
           boundaryMarkerIndex,
-          drawFrom: 'CLAN_CARDS',
+          drawFrom: CardTypes.CLAN_CARDS,
         });
         game.endTurn();
       }

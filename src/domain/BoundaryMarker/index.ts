@@ -1,8 +1,12 @@
 import { Card, CardDetails } from '../Card';
 import { CombinationChecker } from '../CombinationChecker';
+import {
+  BoundaryCannotBeClaimedError,
+  BoundaryMarkerIsFullError,
+} from '../errors';
 import { PlayerID, STGame } from '../SchottenTottenGame';
 
-export type BoundaryMarkerOwner = '1' | '2' | 'NOBODY';
+export type BoundaryMarkerOwner = PlayerID.ONE | PlayerID.TWO | 'NOBODY';
 export type BoundaryMarkerIds =
   | 'A'
   | 'B'
@@ -55,7 +59,7 @@ export class BoundaryMarker {
       playerId === STGame.PLAYER_1 ? this.player1Cards : this.player2Cards;
 
     if (playerCards.length >= this.maximumCardNumber) {
-      throw new RangeError('BOUNDARY_MARKER_IS_FULL');
+      throw new BoundaryMarkerIsFullError();
     }
 
     playerCards.push(card);
@@ -83,7 +87,7 @@ export class BoundaryMarker {
       !isPlayer2SideFull ||
       !this.firstPlayerToComplete
     ) {
-      throw new RangeError('BOUNDARY_CANNOT_BE_CLAIMED');
+      throw new BoundaryCannotBeClaimedError();
     }
 
     const player1Combination = CombinationChecker.determineCombination(

@@ -1,4 +1,5 @@
-import { STGame } from '../';
+import { CardTypes, STGame } from '../';
+import { DomainError } from '../../Errors';
 
 describe('Component SchottenTottenGame.playCard()', () => {
   describe('Given a Game that just started', () => {
@@ -10,7 +11,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
         playerID: STGame.PLAYER_1,
         boundaryMarkerIndex: 0,
         cardIndex: 0,
-        drawFrom: 'CLAN_CARDS',
+        drawFrom: CardTypes.CLAN_CARDS,
       });
 
       it('Then the card is played on the boundary marker 0', () => {
@@ -29,18 +30,25 @@ describe('Component SchottenTottenGame.playCard()', () => {
       game.startGame();
 
       let error;
+
       try {
         game.playCard({
           playerID: STGame.PLAYER_2,
           boundaryMarkerIndex: 0,
           cardIndex: 0,
-          drawFrom: 'CLAN_CARDS',
+          drawFrom: CardTypes.CLAN_CARDS,
         });
-      } catch (err: any) {
+      } catch (err: unknown) {
+        if (err instanceof DomainError) {
+          expect(err.code).toStrictEqual('NOT_YOUR_TURN');
+          expect(err.name).toStrictEqual('DOMAIN_ERROR');
+          expect(err.message).toStrictEqual(`It's not your turn to play`);
+        }
+
         error = err;
       }
 
-      expect(error.message).toStrictEqual('NOT_YOUR_TURN');
+      expect(error).toBeInstanceOf(DomainError);
     });
   });
 
@@ -52,7 +60,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
-      drawFrom: 'CLAN_CARDS',
+      drawFrom: CardTypes.CLAN_CARDS,
     });
 
     describe('When player 1 tries to plays again', () => {
@@ -63,13 +71,21 @@ describe('Component SchottenTottenGame.playCard()', () => {
             playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: 0,
             cardIndex: 0,
-            drawFrom: 'CLAN_CARDS',
+            drawFrom: CardTypes.CLAN_CARDS,
           });
-        } catch (err: any) {
+        } catch (err: unknown) {
+          if (err instanceof DomainError) {
+            expect(err.code).toStrictEqual('CARD_PLAYED_ALREADY');
+            expect(err.name).toStrictEqual('DOMAIN_ERROR');
+            expect(err.message).toStrictEqual(
+              'Player already played a card for this turn',
+            );
+          }
+
           error = err;
         }
 
-        expect(error.message).toStrictEqual('CARD_PLAYED_ALREADY');
+        expect(error).toBeInstanceOf(DomainError);
       });
     });
   });
@@ -86,13 +102,19 @@ describe('Component SchottenTottenGame.playCard()', () => {
             playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: -1,
             cardIndex: 0,
-            drawFrom: 'CLAN_CARDS',
+            drawFrom: CardTypes.CLAN_CARDS,
           });
-        } catch (err: any) {
+        } catch (err: unknown) {
+          if (err instanceof DomainError) {
+            expect(err.code).toStrictEqual('INVALID_BOUNDARY_ID');
+            expect(err.name).toStrictEqual('DOMAIN_ERROR');
+            expect(err.message).toStrictEqual('This boundary id is invalid');
+          }
+
           error = err;
         }
 
-        expect(error.message).toStrictEqual('INVALID_BOUNDARY_ID');
+        expect(error).toBeInstanceOf(DomainError);
       });
     });
   });
@@ -109,13 +131,19 @@ describe('Component SchottenTottenGame.playCard()', () => {
             playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: 0,
             cardIndex: -1,
-            drawFrom: 'CLAN_CARDS',
+            drawFrom: CardTypes.CLAN_CARDS,
           });
-        } catch (err: any) {
+        } catch (err: unknown) {
+          if (err instanceof DomainError) {
+            expect(err.code).toStrictEqual('INVALID_CARD_INDEX');
+            expect(err.name).toStrictEqual('DOMAIN_ERROR');
+            expect(err.message).toStrictEqual('This card index is invalid');
+          }
+
           error = err;
         }
 
-        expect(error.message).toStrictEqual('INVALID_CARD_INDEX');
+        expect(error).toBeInstanceOf(DomainError);
       });
     });
   });
@@ -128,7 +156,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
-      drawFrom: 'CLAN_CARDS',
+      drawFrom: CardTypes.CLAN_CARDS,
     });
     game.endTurn();
 
@@ -136,7 +164,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       playerID: STGame.PLAYER_2,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
-      drawFrom: 'CLAN_CARDS',
+      drawFrom: CardTypes.CLAN_CARDS,
     });
     game.endTurn();
 
@@ -144,7 +172,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
-      drawFrom: 'CLAN_CARDS',
+      drawFrom: CardTypes.CLAN_CARDS,
     });
     game.endTurn();
 
@@ -152,7 +180,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       playerID: STGame.PLAYER_2,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
-      drawFrom: 'CLAN_CARDS',
+      drawFrom: CardTypes.CLAN_CARDS,
     });
     game.endTurn();
 
@@ -160,7 +188,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       playerID: STGame.PLAYER_1,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
-      drawFrom: 'CLAN_CARDS',
+      drawFrom: CardTypes.CLAN_CARDS,
     });
     game.endTurn();
 
@@ -168,7 +196,7 @@ describe('Component SchottenTottenGame.playCard()', () => {
       playerID: STGame.PLAYER_2,
       boundaryMarkerIndex: 0,
       cardIndex: 0,
-      drawFrom: 'CLAN_CARDS',
+      drawFrom: CardTypes.CLAN_CARDS,
     });
     game.endTurn();
 
@@ -180,13 +208,21 @@ describe('Component SchottenTottenGame.playCard()', () => {
             playerID: STGame.PLAYER_1,
             boundaryMarkerIndex: 0,
             cardIndex: 0,
-            drawFrom: 'CLAN_CARDS',
+            drawFrom: CardTypes.CLAN_CARDS,
           });
         } catch (err: any) {
+          if (err instanceof DomainError) {
+            expect(err.code).toStrictEqual('BOUNDARY_MARKER_IS_FULL');
+            expect(err.name).toStrictEqual('DOMAIN_ERROR');
+            expect(err.message).toStrictEqual(
+              `This boundary marker is full already`,
+            );
+          }
+
           error = err;
         }
 
-        expect(error.message).toStrictEqual('BOUNDARY_MARKER_IS_FULL');
+        expect(error).toBeInstanceOf(DomainError);
       });
     });
   });

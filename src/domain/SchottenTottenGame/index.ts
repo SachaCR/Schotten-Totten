@@ -5,6 +5,18 @@ import {
 } from '../BoundaryMarker';
 import { Card } from '../Card';
 import { CardDeck as CardDeck } from '../CardDeck';
+import {
+  CardPlayedAlreadyError,
+  DomainError,
+  DomainErrorCode,
+  GameNotStartedOrOverError,
+  GameOverError,
+  InvalidBoundaryError,
+  InvalidCardIndexError,
+  NotEnoughCardInTheClanPileError,
+  NotYourTurnError,
+  PlayerHasNotPlayedError,
+} from '../errors';
 import { GameId, UuidGameId } from '../GameId';
 import { Player, PlayerState } from '../Player';
 import { WinnerChecker } from '../WinnerChecker';
@@ -21,7 +33,15 @@ const boundaryMarkersIds: BoundaryMarkerIds[] = [
   'I',
 ];
 
-export type PlayerID = '1' | '2';
+export enum PlayerID {
+  ONE = '1',
+  TWO = '2',
+}
+
+export enum CardTypes {
+  CLAN_CARDS = 'CLAN_CARDS',
+  TACTICAL_CARD = 'TACTICAL_CARD',
+}
 
 export type GameStatus = 'INITIATED' | 'STARTED' | 'GAME OVER';
 
@@ -36,8 +56,8 @@ export type GameState = {
 };
 
 export class STGame {
-  static PLAYER_1: PlayerID = '1';
-  static PLAYER_2: PlayerID = '2';
+  static PLAYER_1: PlayerID = PlayerID.ONE;
+  static PLAYER_2: PlayerID = PlayerID.TWO;
 
   private gameId: GameId;
   private playerMaxCardInHands: number;
@@ -85,7 +105,7 @@ export class STGame {
       const card2 = this.cardDeck.drawClanCard();
 
       if (!card1 || !card2) {
-        throw new RangeError('NOT_ENOUGH_CARD_IN_THE_CLAN_PILE');
+        throw new NotEnoughCardInTheClanPileError();
       }
 
       this.player1.receiveCard(card1);
@@ -99,28 +119,28 @@ export class STGame {
     playerID: PlayerID;
     cardIndex: number;
     boundaryMarkerIndex: number;
-    drawFrom: 'CLAN_CARDS' | 'TACTICAL_CARD';
+    drawFrom: CardTypes;
   }): void {
     const { boundaryMarkerIndex, cardIndex, playerID, drawFrom } = params;
 
     if (this.status !== 'STARTED') {
-      throw new RangeError('GAME_NOT_STARTED_OR_OVER');
+      throw new GameNotStartedOrOverError();
     }
 
     if (!this.isItPlayerTurn(playerID)) {
-      throw new RangeError('NOT_YOUR_TURN');
+      throw new NotYourTurnError();
     }
 
     if (this.isCardPlayed) {
-      throw new RangeError('CARD_PLAYED_ALREADY');
+      throw new CardPlayedAlreadyError();
     }
 
     if (!this.isboundaryMarkerIndexValid(boundaryMarkerIndex)) {
-      throw new RangeError('INVALID_BOUNDARY_ID');
+      throw new InvalidBoundaryError();
     }
 
     if (!this.isPlayerCardIndexValid(cardIndex)) {
-      throw new RangeError('INVALID_CARD_INDEX');
+      throw new InvalidCardIndexError();
     }
 
     const player = playerID === STGame.PLAYER_1 ? this.player1 : this.player2;
@@ -128,9 +148,11 @@ export class STGame {
 
     try {
       this.boundaryMarkers[boundaryMarkerIndex].addCard(playerID, card);
-    } catch (err: any) {
-      if (err.message === 'BOUNDARY_MARKER_IS_FULL') {
-        player.receiveCard(card);
+    } catch (err: unknown) {
+      if (err instanceof DomainError) {
+        if (err.code === 'BOUNDARY_MARKER_IS_FULL') {
+          player.receiveCard(card);
+        }
       }
 
       throw err;
@@ -138,7 +160,7 @@ export class STGame {
 
     let newCard: Card | undefined;
 
-    if (drawFrom === 'CLAN_CARDS') {
+    if (drawFrom === CardTypes.CLAN_CARDS) {
       newCard = this.cardDeck.drawClanCard();
 
       if (!newCard) {
@@ -161,7 +183,7 @@ export class STGame {
 
   endTurn(): void {
     if (!this.isCardPlayed) {
-      throw new Error('PLAYER_HAS_NOT_PLAYED');
+      throw new PlayerHasNotPlayedError();
     }
 
     this.currentPlayerID =
@@ -178,15 +200,15 @@ export class STGame {
     const { boundaryMarkerIndex, playerID } = params;
 
     if (!this.isItPlayerTurn(playerID)) {
-      throw new RangeError('NOT_YOUR_TURN');
+      throw new NotYourTurnError();
     }
 
     if (this.winner !== 'NOBODY') {
-      throw new RangeError('GAME_OVER');
+      throw new GameOverError();
     }
 
     if (!this.isboundaryMarkerIndexValid(boundaryMarkerIndex)) {
-      throw new RangeError('INVALID_BOUNDARY_ID');
+      throw new InvalidBoundaryError();
     }
 
     this.boundaryMarkers[boundaryMarkerIndex].claim();
@@ -213,7 +235,7 @@ export class STGame {
 
   // pass(playerID: PlayerID): void {
   //   if (!this.isItPlayerTurn(playerID)) {
-  //     throw new RangeError('NOT_YOUR_TURN');
+  //     throw new DomainError('NOT_YOUR_TURN');
   //   }
 
   //   const playerCompletedAllMarkers =
@@ -221,7 +243,7 @@ export class STGame {
   //   const playerHasOnlyTacticalCards = false; // isPlayerHasOnlyTacticalCards(playerID);
 
   //   if (!playerCompletedAllMarkers || !playerHasOnlyTacticalCards) {
-  //     throw new RangeError('PLAYER_CANNOT_PASS');
+  //     throw new DomainError('PLAYER_CANNOT_PASS');
   //   }
 
   //   this.currentPlayerID = this.currentPlayerID === '1' ? '2' : '1';

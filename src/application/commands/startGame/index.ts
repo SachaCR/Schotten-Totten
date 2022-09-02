@@ -1,5 +1,5 @@
 import { Command, Context } from 'dyal';
-import { STGame } from '../../../domain';
+import { GameState, STGame } from '../../../domain';
 import { AppDependencies } from '../..';
 
 type StartGameCommandContext = Context<
@@ -20,7 +20,7 @@ export interface StartGameCommand extends Command {
 }
 
 export interface StartGameCommandResult {
-  gameId: string;
+  gameState: GameState;
 }
 
 async function startGameCommandHandler(
@@ -36,7 +36,7 @@ async function startGameCommandHandler(
   await gameSessionRepository.add(game);
 
   return {
-    gameId: game.readState().gameId.value(),
+    gameState: game.readState(),
   };
 }
 

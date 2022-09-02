@@ -1,12 +1,13 @@
 import { BoundaryMarker } from '../';
 import { Card } from '../../Card';
-import { STGame } from '../../SchottenTottenGame';
+import { DomainError } from '../../Errors';
+import { PlayerID, STGame } from '../../SchottenTottenGame';
 
 describe('Component BoundaryMarker.addCard()', () => {
   describe('Given an empty BoundaryMarker', () => {
     describe('When player 1 adds a card', () => {
       const boundaryMarker = new BoundaryMarker('A');
-      boundaryMarker.addCard('1', new Card(1, 'blue'));
+      boundaryMarker.addCard(PlayerID.ONE, new Card(1, 'blue'));
 
       it('Then player 1 cards contains the card', () => {
         expect(boundaryMarker.readState().player1Cards).toStrictEqual([
@@ -26,7 +27,7 @@ describe('Component BoundaryMarker.addCard()', () => {
   describe('Given a empty BoundaryMarker', () => {
     describe('When player 2 adds a card', () => {
       const boundaryMarker = new BoundaryMarker('A');
-      boundaryMarker.addCard('2', new Card(1, 'blue'));
+      boundaryMarker.addCard(PlayerID.TWO, new Card(1, 'blue'));
 
       it('Then player  cards contains the card', () => {
         expect(boundaryMarker.readState().player2Cards).toStrictEqual([
@@ -119,11 +120,19 @@ describe('Component BoundaryMarker.addCard()', () => {
 
           try {
             boundaryMarker.addCard(STGame.PLAYER_1, new Card(4, 'blue'));
-          } catch (err: any) {
+          } catch (err: unknown) {
+            if (err instanceof DomainError) {
+              expect(err.code).toStrictEqual('BOUNDARY_MARKER_IS_FULL');
+              expect(err.name).toStrictEqual('DOMAIN_ERROR');
+              expect(err.message).toStrictEqual(
+                'This boundary marker is full already',
+              );
+            }
+
             error = err;
           }
 
-          expect(error.message).toStrictEqual('BOUNDARY_MARKER_IS_FULL');
+          expect(error).toBeInstanceOf(DomainError);
         });
       });
     });

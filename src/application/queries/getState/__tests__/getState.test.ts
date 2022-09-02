@@ -1,9 +1,9 @@
-import { DyalApp } from 'dyal';
-import { assertNever } from 'typedoc/dist/lib/utils';
 import { GetStateQuery, GetStateQueryResult } from '..';
 import { buildApp } from '../../..';
 import { STGame } from '../../../../domain';
+import { silentLogger } from '../../../../infrastructure';
 import { buildGameSessionInMemory } from '../../../../infrastructure/repositories/GameSession/InMemory';
+import { ApplicationError } from '../../../Errors';
 
 describe('Component GetStateQuery', () => {
   describe('Given A game id', () => {
@@ -16,6 +16,7 @@ describe('Component GetStateQuery', () => {
         await gameSessionRepository.add(game);
 
         const app = buildApp({
+          logger: silentLogger,
           gameSessionRepository,
         });
 
@@ -27,30 +28,28 @@ describe('Component GetStateQuery', () => {
           },
         };
 
-        const gameState = await app.execute<GetStateQueryResult>(getStateQuery);
+        const gameStateResult = await app.execute<GetStateQueryResult>(
+          getStateQuery,
+        );
 
-        switch (gameState.outcome) {
-          case 'game-found':
-            expect(gameState.gameState).toHaveProperty('gameId');
-            expect(gameState.gameState).toHaveProperty('player1');
-            expect(gameState.gameState).toHaveProperty('player2');
-            expect(gameState.gameState).toHaveProperty('boundaryMarkers');
-            expect(gameState.gameState).toHaveProperty('status');
-            expect(gameState.gameState).toHaveProperty('winner');
-            expect(gameState.gameState).toHaveProperty('currentPlayerID');
-            break;
+        const gameState = gameStateResult.gameState;
 
-          default:
-            throw new Error('Game should have been found');
-        }
+        expect(gameState).toHaveProperty('gameId');
+        expect(gameState).toHaveProperty('player1');
+        expect(gameState).toHaveProperty('player2');
+        expect(gameState).toHaveProperty('boundaryMarkers');
+        expect(gameState).toHaveProperty('status');
+        expect(gameState).toHaveProperty('winner');
+        expect(gameState).toHaveProperty('currentPlayerID');
       });
     });
 
     describe('When this id does not exists', () => {
-      it('Then it returns game-not-found outcome', async () => {
+      it('Then it throws an error', async () => {
         const gameId = 'toto';
         const gameSessionRepository = buildGameSessionInMemory();
         const app = buildApp({
+          logger: silentLogger,
           gameSessionRepository,
         });
 
@@ -62,9 +61,23 @@ describe('Component GetStateQuery', () => {
           },
         };
 
-        const gameState = await app.execute<GetStateQueryResult>(getStateQuery);
+        let error;
 
-        expect(gameState.outcome).toStrictEqual('game-not-found');
+        try {
+          await app.execute<GetStateQueryResult>(getStateQuery);
+        } catch (err: unknown) {
+          if (err instanceof ApplicationError) {
+            expect(err.code).toStrictEqual('NOT_FOUND');
+            expect(err.name).toStrictEqual('APPLICATION_ERROR');
+            expect(err.message).toStrictEqual(
+              `We cannot find the context to execute this command`,
+            );
+          }
+
+          error = err;
+        }
+
+        expect(error).toBeInstanceOf(ApplicationError);
       });
     });
   });
