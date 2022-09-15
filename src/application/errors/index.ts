@@ -27,11 +27,20 @@ export class InvalidCommandError extends ApplicationError {
     );
 
     this.errors = errors;
-    Object.setPrototypeOf(this, ApplicationError.prototype);
+
+    Object.setPrototypeOf(this, InvalidCommandError.prototype);
   }
 
-  getValidationErrors(): ValidationError[] {
+  public getValidationErrors(): ValidationError[] {
     return this.errors;
+  }
+
+  public getReadableErrors(): string {
+    const validationErrorDetails = this.errors
+      .map((error) => `- ${error.path}: ${error.message}`)
+      .join('\n');
+
+    return validationErrorDetails;
   }
 }
 
@@ -57,7 +66,8 @@ export class NotFoundError extends ApplicationError {
       `We cannot find the context to execute this command`,
       ApplicationErrorCode.NOT_FOUND,
     );
-    Object.setPrototypeOf(this, ApplicationError.prototype);
+
+    Object.setPrototypeOf(this, NotFoundError.prototype);
   }
 }
 
@@ -67,6 +77,7 @@ export class AppCrashError extends ApplicationError {
       `Sorry an unexpected error happened.`,
       ApplicationErrorCode.APP_CRASHED,
     );
-    Object.setPrototypeOf(this, ApplicationError.prototype);
+
+    Object.setPrototypeOf(this, AppCrashError.prototype);
   }
 }

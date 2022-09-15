@@ -1,6 +1,7 @@
 import { silentLogger } from '../../../../infrastructure';
 import { StartGameCommand, StartGameCommandResult } from '..';
 import { buildApp } from '../../..';
+import { validateGameState } from '../../../__tests__/validateGameState';
 import { buildGameSessionInMemory } from '../../../../infrastructure/repositories/GameSession/InMemory';
 
 describe('Component StartGameCommand', () => {
@@ -28,14 +29,7 @@ describe('Component StartGameCommand', () => {
 
         const { gameState } = result;
 
-        // @TODO write a function that validates an object is a game state.
-        expect(gameState).toHaveProperty('gameId');
-        expect(gameState).toHaveProperty('player1');
-        expect(gameState).toHaveProperty('player2');
-        expect(gameState).toHaveProperty('boundaryMarkers');
-        expect(gameState).toHaveProperty('status');
-        expect(gameState).toHaveProperty('winner');
-        expect(gameState).toHaveProperty('currentPlayerID');
+        expect(validateGameState(gameState)).toBeTruthy();
       });
     });
   });

@@ -24,8 +24,8 @@ const CardTypesEnum = zod.nativeEnum(CardTypes);
 const playCardCommandSchema = zod.object({
   gameId: zod.string().uuid(),
   playerID: PlayerIDEnum,
-  cardIndex: zod.number().positive().int(),
-  boundaryMarkerIndex: zod.number().positive().int(),
+  cardIndex: zod.number().gte(0).int(),
+  boundaryMarkerIndex: zod.number().gte(0).int(),
   drawFrom: CardTypesEnum,
 });
 
@@ -54,7 +54,8 @@ async function playCardCommandHandler(
       reshapeZodIssueIntoValidationError,
     );
 
-    throw new InvalidCommandError(validationErrors);
+    const error = new InvalidCommandError(validationErrors);
+    throw error;
   }
 
   const {

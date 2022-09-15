@@ -1,4 +1,5 @@
 import { createApp, createCommandBus, createQueryBus } from 'dyal';
+import { PlayCardCommand } from './commands/playCard';
 import { startGameCommand } from './commands/startGame';
 import { errorHandlerMiddleware } from './middlewares/errorHandler';
 import { getStateQuery } from './queries/getState';
@@ -19,6 +20,8 @@ export function buildApp(dependencies: AppDependencies) {
 
   const commandBus = createCommandBus();
   commandBus.register(startGameCommand.name, startGameCommand.handler);
+  commandBus.register(PlayCardCommand.name, PlayCardCommand.handler);
+
   app.on('command').use(commandBus.middleware);
 
   const queryBus = createQueryBus();
